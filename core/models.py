@@ -38,8 +38,11 @@ class Restriction(models.Model):
   Indeed, if reset_period is null, the restriction is absolute, otherwise
   the restriction becomes a "usage throttling".
   """
+  class Meta:
+    ordering = ['-date']
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   quantity = models.PositiveSmallIntegerField()
+  date = models.DateTimeField()
   reset_period = models.DurationField(null=True, blank=True)
 
 class Request(models.Model):
@@ -53,6 +56,8 @@ class Request(models.Model):
   the Use relationship. If processed true and the request is not approved,
   it remains in Request relationship as log of failed request.
   """
+  class Meta:
+    ordering = ["-date", "user"]
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
@@ -63,6 +68,8 @@ class Use(models.Model):
   Relationship between user and component that models a use of the
   component.
   """
+  class Meta:
+    ordering = ["-date"]
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
