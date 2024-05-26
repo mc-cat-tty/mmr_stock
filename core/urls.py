@@ -1,6 +1,8 @@
 from django.urls import path
-from core.views import ComponentListAPIView
+from rest_framework import routers
+from .views import ComponentViewSet
 
-urlpatterns = [
-  path('components/', ComponentListAPIView.as_view())
-]
+router = routers.SimpleRouter()
+router.register(r'components', ComponentViewSet, r'components')
+
+urlpatterns = router.urls
