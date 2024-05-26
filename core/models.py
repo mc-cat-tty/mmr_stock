@@ -1,5 +1,6 @@
 from tkinter import CASCADE
 from django.db import models
+from os.path import join
 
 class Component(models.Model):
   """
@@ -11,9 +12,13 @@ class Component(models.Model):
   Whenever quantity reaches zero the queuing the queuing mechanism is enabled,
   and protection flag is therefore ignored, since a request is sent anyway.
   """
-  name = models.CharField(max_length=20)
-  picture = models.ImageField(blank=True)
-  description = models.TextField(blank=True)
+  name = models.CharField(max_length=100)
+  code = models.CharField(max_length=50, blank=True)
+  picture = models.ImageField(
+    upload_to='components_pics',
+    default=join('static', 'unknown_component.png'),
+    blank=True
+  )
   datasheet_url = models.URLField(max_length=200, blank=True)
   quantity = models.PositiveSmallIntegerField()
 
@@ -27,8 +32,12 @@ class User(models.Model):
   """
   Entity that models a user.
   """
-  name = models.CharField(max_length=20)
-  propic = models.ImageField(blank=True)
+  name = models.CharField(max_length=100)
+  propic = models.ImageField(
+    upload_to='users_pics',
+    default=join('static', 'unknown_user.png'),
+    blank=True
+  )
 
 class Restriction(models.Model):
   """
