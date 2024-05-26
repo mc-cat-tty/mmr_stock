@@ -1,0 +1,200 @@
+"MOSFET STMicroelectronics, canale N, 5 mΩ, 120 A, TO-220, Su foro",FQP33N10,29
+"Condensatore ceramico multistrato MLCC, 0805 (2012M), 47nF, ±10%, 50V cc, SMD, X7R",X7R 50V 47nF,50
+"MOSFET STMicroelectronics, canale N, 18 mΩ, 50 A, D2PAK (TO-263), Montaggio superficiale",STB55NF06T4,2
+Comparatore analogico,LM393ADR,7
+"Comparatore Texas Instruments, Su foro alimentazione singola e duale, PDIP, 4 canali, 14 Pin",LM239N,24
+"Contatore CD4017BM, stadi 5, 4000, SOIC, 16-Pin 1",CD4017BM,8
+"Regolatore di tensione L7805CDT-TR, 1.5A, 3-Pin, DPAK",L7805CDT-TR,10
+"Gate logico Quad OR Texas Instruments, 3 V → 18 V, 14 Pin, PDIP",CD4071BE,49
+"Resistore Vishay, 5mΩ ±1% 3W, Serie LVR",LVR035L000FE12,12
+"MOSFET Infineon, canale P, 110 MO, 18 A, DPAK (TO-252), SMD",IRFR5505TRPBF,40
+Porte logiche Single 2 Input,SN74LVC1G08DBVR,9
+TI Buffer e line driver,SN74LV4T125PWR,5
+"Amplificatore operazionale Texas Instruments, Su foro, al. Duale, PDIP",UA741CP,49
+Porte logiche Auto Cat Dual 4 Inp Positive AND Gates,SN74HC21QDRQ1,4
+"Comparatore Texas Instruments, SMD alimentazione singola e duale, SOIC, 4 canali, 14 Pin",LM339D,50
+Fusibile supporto 20A - 1 circuiti lama a montaggio superficiale,36-3587-10-ND,5
+"ADC MCP3208-CI/P, Octal, 12 bit-, 100ksps, PDIP, 16 Pin",MCP3208-CI/P,8
+"Controller CAN MCP2515-I/P, 1MBPS, standard CAN 2.0B, PDIP 18 Pin",MCP2515-I/P,9
+"Ricetrasmettitore CAN MCP2561-E/P, 1MBPS, standard IEC 61000-4-2, PDIP 8 Pin",MCP2561-E/P,14
+"Ricetrasmettitore CAN MCP2562-E/P, 1MBPS, standard IEC 61000-4-2, PDIP 8 Pin",MCP2562-E/P,7
+"Gate logico Triple AND Texas Instruments, 3 V → 18 V, 14 Pin, PDIP",CD4073BEE4,33
+"Resistenza SMD TE Connectivity Film spesso, 6.8kΩ, 0805 (2012M), ±5%, 0.33W",CRGH0805J6K8,100
+"LED Kingbright Rosso, PCB, 2 V, 3 mm (T-1)",L-934ID,28
+"LED Kingbright Verde, PCB, 2,2 V, 3 mm (T-1)",L-934SGD,30
+"Resistenza SMD Vishay Film spesso, 560kΩ, 1206 (3216M), ±1%, 0.25W",CRCW1206560KFKEA,46
+Resistori a pellicola spessa - SMD 1/4watt 100ohms 1%,CRCW1206100RFKEB,90
+Resistori a pellicola spessa - SMD 1/8watt 20Kohms 1% 100ppm,CRCW080520K0FKEA,18
+"RESISTORE RS PRO 150 Ω ±5% 0,25W",,50
+"Resistenza RS PRO, 390Ω, 0.25W, ±5%",,50
+"LED Kingbright Giallo, PCB, 2 V, 3 mm (T-1)",L-934SYD,30
+"Resistore RS PRO, 120Ω ±5% 0.25W",,10
+Resistori a pellicola spessa - SMD 0805 390ohms 1% AEC-Q200,ERJ-6ENF3900V,8
+Resistori a pellicola spessa - SMD 1/8watt 3Kohms 1% 100ppm,CRCW08053K00FKEA,80
+Resistori a pellicola spessa - SMD 1/4watts 1.8Kohms 1%,RK73H2BTTD1801F,98
+"Resistori su chip 1206 (3216 metrico) AEC-Q200 per settore automotive A film spesso, 22 kOhms ±1% 0,25W, 1/4W",RMCF1206FT22K0,93
+"Diodo Zener Nexperia, 3.3V, Su foro, 500 mW, DO-35","BZX79-C3V3,113",38
+"Condensatore Panasonic, serie FP SMD, 100μF, 35V cc, ±20%, +105°C, SMD",EEEFPV101XAP,9
+"Resistenza SMD Bourns Striscia metallica, 1mΩ, 2512 (6432M), ±1%, 3W",CRE2512-FZ-R001E-3,10
+Resistori a pellicola spessa - SMD 0805 240ohms 1% AEC-Q200,ERJ-6ENF2400V,9
+"Diodo STMicroelectronics, Su foro, 10A, 25V, TO-220AC",STPS10L25D,6
+"Amplificatore operazionale Texas Instruments, SMD, alimentazione doppia/singola, SOIC",LM358D,7
+"MOSFET onsemi, canale P, 190 mΩ, 16,5 A, TO-220AB, Su foro",FQP17P10,48
+"Resistenza SMD TE Connectivity Film spesso, 2.2kΩ, 0805 (2012M), ±5%, 0.33W",CRGH0805J2K2,98
+MOSFET P-Channel FET Enhancement Mode,NDT452AP,9
+MOSFET SSOT-3 P-CH -30V,FDN360P,5
+MOSFET SOT-23 N-CH LOGIC,BSS138,8
+Raddrizzatori Vr/50V Io/1A T/R,1N4001-T,14
+MOSFET MOSFT PCh -100V -23A 117mOhm 64.7nC,IRF9540NPBF,1
+MOSFET N-Ch 30V 7.7A DSO-8 OptiMOS 3M,BSO220N03MD G,5
+Condensatori al tantalio - puro SMD 15uF 6.3volts 10% A case ESR 2 Molded,TR3A156K6R3C2000,8
+Condensatori in ceramica multistrato MLCC - SMD/SMT RECOMMENDED ALT 810-C3216X5R1C156M1B,C3216JB1C156M160AB,9
+Diodi Zener 5.1V 500mW,MMSZ5V1T1G,21
+Diodi- Zener 10V 3W ±5% a montaggio smb,1SMB5925BT3GOSTR-ND,8
+Resistori a pellicola spessa - SMD 0805 4.7Kohms 0.5W 5% AEC-Q200,ERJ-P06J472V,71
+Resistori a pellicola spessa - SMD 0805 47Kohms 1% AEC-Q200,ERJ-6ENF4702V,22
+Resistori a pellicola spessa - SMD 1/4watt 1.2Kohms 5%,CRCW12061K20JNEA,98
+"Condensatore ceramico multistrato MLCC, AEC-Q200, 0805 (2012M), 1μF, ±10%, 25V cc, SMD, X7R",GCM21BR71E105KA56L,50
+Resistori a pellicola sottile - SMD 1/4W 5K ohm .1% 25ppm,RT1206BRD075KL,11
+Resistori a pellicola spessa - SMD 0805 120ohms 5% AEC-Q200,ERJ-6GEYJ121V,6
+"LED Kingbright, Blu, giallo, SMD, 2 Led",KPBL-3025QBDSYKC,61
+Traslazione - Livelli di tensione Octal Bus Xcvr,SN74LVCC3245ADWR,2
+CI di interfaccia CAN CAN Flexible Data Rate Transceiver,MCP2562FDT-H/SN,1
+Diodi Zener ZEN SMA REG 1.5W 6.8V TR,SZ1SMA5921BT3G,4
+Convertitori da analogico a digitale - ADC 12-bit SPI 8 Chl,MCP3208-CI/SL,2
+Transistor bipolari - BJT PNP BIPOLAR,BC807-16-7-F,24
+Condensatori in ceramica multistrato MLCC - SMD/SMT 1uF+/-10% 25V X7R 2012,CL21B105KAFNFNE,88
+Condensatori elettrolitici in alluminio - conduttori radiali WCAP-ATG5 1uF 50V 20% Radial,860 020 672 005,18
+"Microcontrollore Microchip, AVR, PDIP, ATmega, 28 Pin, Su foro, 8bit, 20MHz",ATMEGA328P-PU,4
+Condensatori al tantalio - puro SMD 25V 1uF 10% 0805 ESR= 2.5 Ohm,TPSR105K025R2500,5
+"DAC MCP4922-E/P, 2, 12 bit-, 1%FSR, Seriale (SPI/Microwire), 14-Pin, PDIP",MCP4922-E/P,2
+Diodi e raddrizzatori Schottky 0.5A 20V,MBR0520LT1G,94
+"Amplificatore operazionale Texas Instruments, , SMD, alimentazione doppia/singola, SOIC",LM324PWR,50
+"Resistenza SMD Yageo Film spesso, 39kΩ, 0805 (2012M), ±1%, 0.25 W, 0.125 W",RC0805FR-0739KL,99
+Demultiplexer/multiplexer,CD74HC4067SM96,10
+"Diodi - Uso generico, alimentazione, commutazione 100 Volt 350mA 2.0 Amp IFSM",MCL4148-TR3,24
+"CI di commutazione analogica 5-V, 2:1 (SPDT), 2-channel analog switch with powered-off protection 10-VSSOP -40 to 125",TMUX1072DGSR,1
+"Flip-flop 2 Elemento Tipo D 1 Bit Fronte positivo 14-SOIC (0,154"", 3,90mm di larghezza)",296-1204-5-ND,4
+"Gate logico Quad AND Texas Instruments, 4,5 V → 5,5 V, 14 Pin, SOIC",CD74HCT08M,7
+Porte logiche Quad 2-Input,SN74HC02DR,3
+Condensatori elettrolitici in alluminio - SMD 10UF 35V FK SMD,EEE-FKV100UAR,7
+"Amplificatori operazionali - Amp. op. Dual 1MHz, 16-V rail-to-rail input/output, low-offset voltage, low-power op amp 8-SOIC -40 to 125",TLV9102IDR,1
+"Comparatore Texas Instruments, SMD alimentazione singola e duale, SOIC, 4 canali, 14 Pin",LM2901M/NOPB,6
+MOSFET driver MCP 14E7,,
+"Resistenza SMD Yageo Film spesso, 220kΩ, 0805 (2012M), ±1%, 0.25 W, 0.125 W",RC0805FR-07220KL,98
+"MOSFET Taiwan Semiconductor, canale N, 192 mΩ, 3 A, SOT-23, Montaggio superficiale",TSM2308CX RFG,33
+"Resistenza SMD Vishay Film spesso, 3.3kΩ, 0805 (2012M), ±1%, 0.125W",CRCW08053K30FKEA,50
+"Condensatore ceramico multistrato MLCC, AEC-Q200, 0805 (2012M), 10nF, ±10%, 100V cc, SMD, X7R",CEU4J2X7R2A103K125AE,50
+"Diodo Zener Vishay, 3.3V, Montaggio superficiale, 200 mW, SOD-523, Piccolo segnale",BZX584C3V3-HG3-08,25
+"Comparatore Maxim Integrated, SMD alimentazione singola e duale, SO, 8 Pin",MAX992ESA+,3
+Circuiti di supervisione MicroProc Sup,UCC2946TPWRQ1,4
+"MOSFET onsemi, canale N, 3,5 Ω, 200 mA, SOT-23, Montaggio superficiale",BSS138LT1G,25
+"MOSFET Nexperia, canale N, 1,6 Ω, 320 mA, SOT-323 (SC-70), Montaggio superficiale","BSS138PW,115",78
+"LED Blu ams OSRAM, SMD, 2,85 V, 3030 (1212)",GD CSSPM1.14-UOVJ-W4-1-350-R18,1
+"MOSFET Infineon, canale N, 14,5 MO, 59 A, DPAK (TO-252), SMD",IRFR2905ZTRPBF,20
+"Amplificatore operazionale onsemi, , SMD, alimentazione singola, SOIC",TLV274DR2G,4
+Resistori a pellicola spessa - SMD 681 kOhms 125 mW 0805 1%,RC0805FR-07681KL,97
+"Resistenza SMD Vishay Film spesso, 30kΩ, 1206 (3216M), ±1%, 0.25W",CRCW120630K0FKEA,50
+"Resistenza SMD TE Connectivity Film spesso, 1.8kΩ, 1206 (3216M), ±1%, 0.25W",CRG1206F1K8,50
+"Driver gate MOSFET MCP1416T-E/OT, CMOS, TTL, 1.5 A, 18V, SOT-23, 5-Pin",MCP1416T-E/OT,1
+Invertitore Hex,SN74AHC04DR,1
+Resistori a pellicola spessa - SMD ResHighPowerA 0805 330R 1% 1/2W TC100,CMP0805AFX-3300ELF,10
+"Diodo Taiwan, Montaggio superficiale, 3A, 60V, DO-214AC (SMA)",SK36A R2,69
+"Gate logico Quad NAND Texas Instruments, 2 V → 6 V, 14 Pin, SOIC",CD74HC00M96G4,10
+"Amplificatori operazionali Texas Instruments, Su foro, alimentazione doppia/singola, PDIP",LM324N/NOPB,28
+"MOSFET onsemi, canale N, 77 mΩ, 11,4 A, DPAK (TO-252), Montaggio superficiale",FDD770N15A,10
+"Driver gate MOSFET IRS2004PBF, 0.6 A, 20V, PDIP, 8-Pin",IRS2004PBF,32
+"Codificatori, decodificatori, multiplatori e demultiplatori 74LVC1G157GV/SOT457/SC-74","74LVC1G157GV,125",4
+"Morsettiera per circuito stampato RS PRO Femmina a 3 vie, 1 fila, passo 5.08mm, Montaggio su foro passante",,15
+"Regolatore di tensione MCP1702-3302E/TO, 250mA, 3-Pin, TO-92",MCP1702-3302E/TO,6
+"RS PRO, 10kΩ, 0.25W, ±5%",,8
+CI di interfaccia CAN CAN Tranceiver,MCP2562-H/SN,10
+"Resistenza SMD ROHM Film spesso, 100kΩ, 0805 (2012M), ±1%, 0.125W",MCR10EZPF1003,97
+"Regolatore di tensione LD1117ADT33TR, 1.2A, 3-Pin, DPAK",LD1117ADT33TTR,10
+"Resistenza SMD TE Connectivity Film spesso, 220Ω, 0805 (2012M), ±5%, 0.33W",CRGH0805J220R,99
+"Driver gate MOSFET IRS2109PBF, 0.6 A, 20V, PDIP, 8-Pin",IRS2109PBF,4
+c,492-6681,9
+"Relè di potenza Finder serie 32 Series, SPNO, bobina 24V cc, Montaggio su circuito stampato",32.21.7.024.2300,4
+"MOSFET onsemi, canale N, 12,4 mΩ, 50 A, D2PAK (TO-263), Montaggio superficiale",FDB8447L,1
+MOSFET PSMN3R4-30PL/SOT78/SIL3P,"PSMN3R4-30PL,127",3
+"Diodo per piccoli segnali onsemi, Su foro, 300mA, 100V, DO-35, Singolo, 2 Pin",1N4148,250
+"Sensore di corrente ACHS-7192-000E, 8-Pin, SO-8",ACHS-7192-000E,4
+"Resistenza SMD Panasonic Film spesso, 120kΩ, 0805 (2012M), ±0.5%, 0.1W",ERJ6RED1203V,90
+"Condensatore a film KEMET, R60, 1μF, 160 V ac, 250 V dc, ±5%",R60II4100AA30J,5
+"Gate logico Quad OR Texas Instruments, 3 V → 18 V, 14 Pin, PDIP",CD4075BE,55
+"Resistenza SMD RS PRO Film spesso, 27kΩ, 1206 (3216M), ±1%, 0.25W",,22
+"Resistenza SMD Panasonic Film spesso, 20kΩ, 0805 (2012M), ±1%, 0.5W",ERJP6WF2002V,98
+"RS PRO, 1kΩ, 0.25W, ±5%",,10
+"Gate logico Quad AND Texas Instruments, 2 V → 6 V, 14 Pin, SOIC",CD74HC08M96G4,10
+"Diodo Zener onsemi, 3.3V, Montaggio superficiale, 500 mW, SOD-123",MMSZ5226BT1G,20
+"Resistenza SMD Panasonic Film spesso, 330Ω, 0805 (2012M), ±1%, 0.5W",ERJP06F3300V,25
+"Resistenza SMD Panasonic Film spesso, 240kΩ, 0805 (2012M), ±0.5%, 0.1W",ERJ6RED2403V,100
+"Regolatore di tensione MCP1702-3002E/TO, 250mA, 3-Pin, TO-92",MCP1702-3002E/TO,10
+"Gate logico Quad NOR Toshiba, 2 V → 6 V, 14 Pin, SOIC",74HC02D,18
+"Driver gate MOSFET IRS2003SPBF, 0.6 A, 20V, SOIC, 8-Pin",IRS2003SPBF,2
+"Regolatore di tensione L7805CD2T-TR, 1.5A, 3-Pin, D2PAK",L7805CD2T-TR,2
+"MOSFET Infineon, canale N, 9,4 mΩ, 89 A, TO-220AB, Su foro",IRF2807ZPBF,8
+"Fotoaccoppiatore, Montaggio superficiale, 2 canali, uscita Transistor, 8 Pin",HCPL0531R2,5
+"Regolatore di tensione L7812CD2T-TR, 1.5A, 3-Pin, D2PAK",L7812CD2T-TR,11
+Regolatori di tensione LDO 1.25A LDO Fixed Voltage,MIC2940A-12WU,10
+"Resistenza SMD TE Connectivity Film spesso, 150Ω, 0805 (2012M), ±1%, 0.33W",CRGH0805F150R,97
+Regolatori di tensione LDO 5.0V/400MA LDO,NCV4274CDT50RKG,10
+"Regolatore di tensione NCP1117DT33G, 1A, 3-Pin, DPAK",NCP1117DT33G,7
+"Amplificatore operazionale Texas Instruments, SMD, alimentazione doppia/singola, SOIC",LM324AD,37
+Resistori a pellicola spessa - SMD 1/4watts 30Kohms 5%,RK73B2ATTD303J,47
+"ADC ADS7041IDCUT, 10 bit-, 1Msps, VSSOP, 8 Pin",ADS7041IDCUT,2
+"Driver gate MOSFET L6386AD, CMOS, TTL, 0,65 A, 17V, SOIC, 14-Pin",L6386AD,2
+Resistori a pellicola spessa - SMD 0805 1Kohms 1% AEC-Q200,ERJ-6ENF1001V,66
+Resistori a pellicola spessa - SMD 1/4watt 10Kohms 1%,CRCW120610K0FKEA,98
+"Resistori su chip 1206 (3216 metrico) Anti-solforato A film sottile, 10 kOhms ±1% 0,5W, 1/2W, Digi-Reel",RNCP1206FTD10K0DKR-ND,93
+Resistori a pellicola spessa - SMD 1/4watt 12Kohms 1%,CRCW120612K0FKEA,98
+Resistori a pellicola spessa - SMD CRGP 0805 1K8 1% SMD Resistor,CRGP0805F1K8,37
+"Controller per motori passo passo Geckodrive, 3,5 A, scheda 15 → 50V cc, motore 50V cc, per motori passo passo",G250X,4
+Scheda display MikroElektronika,MIKROE-55,2
+Condensatori in ceramica multistrato MLCC - SMD/SMT 16V 0.1uF X7R 0603 10% Flex Soft,0603YC104KAZ2A,50
+Condensatori in ceramica multistrato MLCC - SMD/SMT 16V 0.1uF X7R 0805 10%,CC0805KRX7R7BB104,69
+,,
+,,
+"Zoccolo SIL Preci-Dip 310-87-106-01-640101 a Saldare, 6 vie, passo 2.54mm, Foro passante",310-87-106-01-640101,15
+Porta AND IC 4 Canale Ingresso con trigger di Schmitt 14-SOIC,SN74HCS08QDRQ1,4
+Porta OR IC 4 Canale Ingresso con trigger di Schmitt 14-SOIC,SN74HCS32QDRQ1TR,4
+"Timer di precisione NE555D, 1 SOIC, 8 Pin",NE555D,3
+"Comparatore Texas Instruments, SMD alimentazione singola e duale, SOIC, 4 canali, 14 Pin",LM2901M/NOPB,20
+Convertitori CC-CC non isolati 250W 24Vin 10A 3.3-40Vout NLog,I6A4W010A033V-001-R,1
+Transistor bipolari - BJT NPN/25V/1.5A/120-200,SS8050CTA,100
+Condensatori a film 6.8uF 100volts 10%,B32562J1685K000,10
+"Diodo Infineon, Montaggio superficiale, 3A, 10V, SOD-323",BAT60AE6327HTSA1,25
+"LED Giallo ams OSRAM, SMD, 3,5 V, 3030 (1212)",LCY CLBP-KZLY-5F5G-8E8G,5
+,,
+"TXB0108PWR Commutatore di livello di tensione, 20-Pin, TSSOP",TXB0108PWR,1
+"Flussante per saldatura Chemtronics, Penna da 9g",cw8300,1
+"Treccia per dissaldatura Chemtronics, lunghezza 1.5m, larghezza 1.5mm , senza piombo",40-2-5,1
+"Punta saldatore RS PRO, serie AT, 2,4 mm, forma: Scalpello conico",,1
+"Adattatore USB Ethernet StarTech.com, USB 3.0/RJ45, 2 Gbit/s, 5 Gbit/s",US1GC30B,
+"Condensatore ceramico multistrato MLCC, 0805 (2012M), 100nF, ±10%, 50V cc, SMD, X7R",08055C104KAT2A,45
+"Relè di segnale Hongfa Europe GMBH, DPDT, 2A, bobina 12V cc PCB",HFD3-V/012,5
+"Punta saldatore RS PRO, serie AT, 0,2 mm, forma: Affilatura conica",,2
+Convertitore DA USB A CAN Innomaker,MS123,2
+"IC flip flop 74HC109D,652, Dual, HC, SOIC, 16-Pin","74HC109D,652",50
+CAN Interface IC W/ SPI Interface,MCP2515-I/SO,5
+High Power LEDs - Single Colour Blue OSLON SSL 120,GD CSSPM1.14-UOVJ-W4-1,35
+Thick Film Resistors - SMD 0805 120ohms 5% AEC-Q200,ERJ-6GEYJ121V,20
+Thick Film Resistors - SMD 1/8Watt 10Kohms 1% Commercial Use,CRCW080510K0FKEAC,100
+Thick Film Resistors - SMD 1/8Watt 20Kohms 1% Commercial Use,CRCW080520K0FKEAC,100
+Multilayer Ceramic Capacitors MLCC - SMD/SMT 50V .1uF X7R 0805 20%TOL,08055C104M4T4A,100
+Multilayer Ceramic Capacitors MLCC - SMD/SMT 0805 15pF 10volts C0G 2%,VJ0805A150GXQPW1BC,10
+Multilayer Ceramic Capacitors MLCC - SMD/SMT 16V 10uF X7R 0805 10%,0805YC106KAT2A,10
+LED Lighting Drivers White LED pwr supply large dis backlight,STLD40DPUR,3
+High Power LEDs - Single Colour Yellow OSLON SSL 150,GY CSHPM1.23-KQKS-36,35
+"Condensatore ceramico multistrato MLCC, 0805 (2012M), 560pF, ±5%, 100V cc, SMD, C0G",VJ0805A561JXBAC,25
+"LED Verde Broadcom, SMD, 2,2 V, 3216 (1206)",HSMG-C150,20
+"Regolatore di tensione L7808ABV, 1A, 3-Pin, TO-220",L7808ABV,25
+"Quarzo RALTRON, 8MHz, ±30ppm, Su foro, 2 pin",AS-8.000-18,10
+"TXB0108PWR Commutatore di livello di tensione, 20-Pin, TSSOP",TXB0108PWR,3
+"Fotoaccoppiatore ON Semiconductor, 2 canali, Montaggio superficiale, uscita Transistor, 8 Pin",HCPL0531R2,2
+"Ricetrasmettitore CAN MCP2551-I/SN, 1MBPS, standard ISO 11898, SOIC 8 Pin",MCP2551-I/SN,6
+"MOSFET onsemi, canale N, 77 mΩ, 11,4 A, DPAK (TO-252), Montaggio superficiale",FDD770N15A,10
+"Resistore SMD Yageo Film spesso, 100Ω, 0805 (2012M), ±1%, 125mW",RC0805FR-07100RL,100
+"MOSFET STMicroelectronics, canale N, 18 mΩ, 50 A, D2PAK (TO-263), Montaggio superficiale",STB55NF06T4,15
+"Resistore SMD Yageo Film spesso, 1kΩ, 0805 (2012M), ±1%, 125mW",RC0805FR-071KL,100
+"Driver gate MOSFET MCP1416T-E/OT, CMOS, TTL, 1,5 A, 18V, SOT-23, 5-Pin",MCP1416T-E/OT,5
