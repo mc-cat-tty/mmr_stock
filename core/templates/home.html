@@ -21,7 +21,7 @@
       </h3>
       <div class="card-body">
         {% for r in recommended %}
-        {% include "component_card.html" with details=False name=r.name img=r.picture %}
+        {% include "component_card_minimal.html" with name=r.name img=r.picture %}
         {% endfor %}
       </div>
       
