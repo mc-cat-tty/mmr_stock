@@ -7,12 +7,15 @@
   <!-- Left column -->
   <div class="fill-width" style="min-width: 512px">
     <div class="card p-4 full-height">
-      <div class="card-body">
-        <form class="d-flex mb-5" role="search">
+      <div class="card-title">
+        <!-- Searchbar -->
+        <form class="d-flex mb-1 sticky-top" role="search">
           <input class="form-control me-2" type="search" placeholder="Search a component" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
-        <div class="container ">
+      </div>
+      <div class="card-body overflow-auto">
+        <div class="container">
           <div class="row row-cols-auto g-3">
             {% for c in components %}
               <div class="col d-flex">
@@ -28,10 +31,10 @@
   <!-- Right column -->
   <div class="sidepanel">
     <div class="card full-height bg-info-subtle">
-      <h3 class="card-header ">
+      <h3 class="card-header">
         For you {% load static %} <img src="{% static 'magic.png' %}">
       </h3>
-      <div class="card-body">
+      <div class="card-body overflow-auto">
         {% for r in recommended %}
           {% include "component_card_minimal.html" with name=r.name img=r.picture %}
         {% endfor %}

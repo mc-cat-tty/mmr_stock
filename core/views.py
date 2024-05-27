@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 def home(request: HttpRequest) -> HttpResponse:
   context = {
-    'recommended': Component.objects.all()[:3],
+    'recommended': Component.objects.all()[:20],
     'components': Component.objects.all()
   }
   return render(request, template_name="home.html", context=context)
