@@ -3,6 +3,7 @@ from rest_framework import serializers, viewsets
 from django.http import HttpResponse
 from .models import Component
 
+
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Component

@@ -56,7 +56,7 @@ ROOT_URLCONF = 'mmr_stock.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [join(BASE_DIR, 'common_templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
