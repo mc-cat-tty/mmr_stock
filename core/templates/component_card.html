@@ -1,15 +1,17 @@
-<div class="shadow-sm card flex-row mb-2 text-bg-light">
+<div class="shadow-sm card text-bg-light" style="width:256px">
   {% load static %}
   <img
-    class="card-img-left align-middle m-1"
+    class="card-img-top p-4"
     src="{% static img %}"
     alt="{{ name }}"
-    width="128px"
-    height="100%"
   >
   <div class="card-body">
-    <p class="card-text p-0 m-0">
-      <div class="fw-bold"> {{ name|slice:":100" }} {% if name|length > 100 %} ... {% endif %} </div>
+    <p class="card-text">
+      <div class="fw-bold flex-fill">
+        {{ name|slice:":100" }}
+        {% if name|length > 100 %} ...
+        {% endif %}
+      </div>
       <hr>
       Code: {{ code }} <br>
       Quantity: {{ quantity }}

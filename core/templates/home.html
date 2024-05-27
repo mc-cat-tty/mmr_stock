@@ -8,23 +8,30 @@
   <div class="fill-width" style="min-width: 512px">
     <div class="card p-4 full-height">
       <div class="card-body">
-        Test
+        <div class="container ">
+          <div class="row row-cols-auto g-3">
+            {% for c in components %}
+              <div class="col d-flex">
+              {% include "component_card.html" with name=c.name img=c.picture code=c.code quantity=c.quantity%} 
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Right column -->
-  <div style="width: 512px">
+  <div class="sidepanel">
     <div class="card full-height bg-info-subtle">
       <h3 class="card-header ">
         For you {% load static %} <img src="{% static 'magic.png' %}">
       </h3>
       <div class="card-body">
         {% for r in recommended %}
-        {% include "component_card_minimal.html" with name=r.name img=r.picture %}
+          {% include "component_card_minimal.html" with name=r.name img=r.picture %}
         {% endfor %}
       </div>
-      
     </div>
   </div>
 </div>
@@ -34,8 +41,12 @@
   height: calc(100vh - 120px);
 }
 
+.sidepanel {
+  width: 400px;
+}
+
 .fill-width {
-  width: calc(100vw - 550px);
+  width: calc(100vw - 450px);
 }
 </style>
 
