@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %} MMR Stock {% endblock %}
+{% block title %} MMR Stock | Home {% endblock %}
 
-{% block content %} Test {% endblock %}
+{% block content %}
+<div class="row row-cols-md-2 m-3 d-flex">
+  <div class="col">
+    <div class="card p-4 full-height">
+      <div class="card-body">
+        Test
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card p-4 full-height">
+      <div class="card-body">
+        ABba
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<style>
+.full-height {
+  height: calc(100vh - 120px);
+}
+</style>
+
+{% endblock %}
