@@ -1,15 +1,37 @@
-<div class="shadow-sm card flex-row mb-2 text-bg-light">
+<div class="shadow-sm card flex-row mb-2 text-bg-light hover-overlay">
   {% load static %}
-  <img
-    class="card-img-left align-middle m-1"
-    src="{% static img %}"
-    title="{{ name }}"
-    width="128px"
-    height="100%"
-  >
+  <div class="card-image">
+    <img
+      class="card-img-left align-middle p-1"
+      src="{% static img %}"
+      title="{{ name }}"
+      width="128px"
+      height="100%"
+    >
+    <div class="image-overlay"></div>
+  </div>
   <div class="card-body">
     <p class="card-text p-0 m-0">
       <div class="fw-bold"> {{ name|slice:":50" }} {% if name|length > 50 %} ... {% endif %} </div>
     </p>
   </div>
 </div>
+
+<style>
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .2s ease;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-image:hover .image-overlay {
+    opacity: 1;
+  }
+  </style>

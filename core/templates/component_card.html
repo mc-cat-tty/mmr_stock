@@ -1,10 +1,13 @@
 <div class="shadow-sm card text-bg-light" style="width:256px">
   {% load static %}
-  <img
-    class="card-img-top p-4"
-    src="{% static img %}"
-    alt="{{ name }}"
-  >
+  <div class="card-image">
+    <img
+      class="card-img-top p-4"
+      src="{% static img %}"
+      alt="{{ name }}"
+    >
+    <div class="image-overlay"></div>
+  </div>
   <div class="card-body">
     <p class="card-text">
       <div class="fw-bold flex-fill">
@@ -18,3 +21,22 @@
     </p>
   </div>
 </div>
+
+<style>
+.image-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .2s ease;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.card-image:hover .image-overlay {
+  opacity: 1;
+}
+</style>
