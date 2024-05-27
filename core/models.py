@@ -12,7 +12,7 @@ class Component(models.Model):
   Whenever quantity reaches zero the queuing the queuing mechanism is enabled,
   and protection flag is therefore ignored, since a request is sent anyway.
   """
-  name = models.CharField('name', max_length=100)
+  name = models.CharField('name', max_length=300)
   code = models.CharField(max_length=50, blank=True)
   picture = models.ImageField(
     upload_to='components_pics',

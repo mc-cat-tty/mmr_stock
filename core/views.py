@@ -1,8 +1,15 @@
 from django.shortcuts import render
 from rest_framework import serializers, viewsets
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from .models import Component
+from django.shortcuts import render
 
+
+def home(request: HttpRequest) -> HttpResponse:
+  context = {
+    'recommended': Component.objects.all()[:3]
+  }
+  return render(request, template_name="home.html", context=context)
 
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:

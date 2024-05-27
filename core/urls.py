@@ -1,8 +1,9 @@
 from django.urls import path
 from rest_framework import routers
-from .views import ComponentViewSet
+from .views import ComponentViewSet, home
 from django.urls import path
-from django.shortcuts import render
+
+STATIC_URL = "/media/static"
 
 router = routers.SimpleRouter()
 router.register(r'components', ComponentViewSet, r'components')
@@ -10,5 +11,5 @@ router.register(r'components', ComponentViewSet, r'components')
 app_name = "core"
 
 urlpatterns = [
-  path("home/", lambda request: render(request, template_name="home.html"), name='home')
+  path("home/", home, name='home')
 ] + router.urls

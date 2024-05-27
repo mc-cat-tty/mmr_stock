@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="row row-cols-md-2 m-3 d-flex">
-  <div class="col">
+  <!-- Left column -->
+  <div class="fill-width" style="min-width: 512px">
     <div class="card p-4 full-height">
       <div class="card-body">
         Test
@@ -12,10 +13,16 @@
     </div>
   </div>
 
-  <div class="col">
-    <div class="card p-4 full-height">
+  <!-- Right column -->
+  <div style="width: 512px">
+    <div class="card full-height bg-info-subtle">
+      <h3 class="card-header ">
+        For you {% load static %} <img src="{% static 'magic.png' %}">
+      </h3>
       <div class="card-body">
-        ABba
+        {% for r in recommended %}
+        {% include "component_card.html" with details=False name=r.name img=r.picture %}
+        {% endfor %}
       </div>
       
     </div>
@@ -25,6 +32,10 @@
 <style>
 .full-height {
   height: calc(100vh - 120px);
+}
+
+.fill-width {
+  width: calc(100vw - 550px);
 }
 </style>
 
