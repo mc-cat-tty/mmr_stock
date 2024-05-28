@@ -1,4 +1,4 @@
-{% load static %}
+{% load static core_extra %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +48,13 @@
         
         <div class="vr"></div>
         
-        <div class="navbar-nav ">
+        <div class="navbar-nav">
           <a class="nav-link" href="#">
+            {% if user.is_authenticated %}
+            {{user|snake_to_capitalized}}
+            {% else %}
+            Login
+            {% endif %}
             <img width="48" class="rounded-circle img-thumbnail" src="{% static 'unknown_user.png' %}">
           </a>
         </div>

@@ -1,11 +1,10 @@
-from typing import Text
 from django.shortcuts import render
 from rest_framework import serializers, viewsets
 from django.http import HttpResponse, HttpRequest
 from .models import Component
 from django.shortcuts import render
 from django.db.models import CharField, TextField, IntegerField
-from operator import attrgetter
+
 
 def home(request: HttpRequest) -> HttpResponse:
   component_text_fields = filter(
@@ -23,7 +22,7 @@ def home(request: HttpRequest) -> HttpResponse:
     'recommended': Component.objects.all()[:20],
     'components': Component.objects.all()[:12],
     'modal_textual_fields': component_text_fields,
-    'modal_numeric_fields': component_numeric_fields
+    'modal_numeric_fields': component_numeric_fields,
   }
 
   return render(request, template_name="home.html", context=context)
