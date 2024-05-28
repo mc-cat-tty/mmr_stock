@@ -1,8 +1,10 @@
+{% load core_extra %}
+
 <div class="modal fade" id="componentModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"> {{ code }} </h5>
+        <h5 class="modal-title" id="title"> </h5>
         <button type="button" class="close" data-dismiss="modal"></button>
       </div>
       <div class="modal-body">
@@ -10,9 +12,9 @@
 
           {% for field in modal_textual_fields %}
           <div class="row">
-            <label class="col-sm-2 col-form-label"> {{ field }} </label>
+            <label class="col-sm-2 col-form-label"> {{ field|snake_to_capitalized }} </label>
             <div class="col-sm-10">
-              <input readonly type="text" class="form-control-plaintext">
+              <input readonly type="text" class="form-control-plaintext" id="{{field}}">
             </div>
           </div>
           {% endfor %}
@@ -28,13 +30,27 @@
 </div>
 
 <script>
-  function onClickComponentCard() {
-    $('#componentModal').modal('show');
-    const xhttp = new XMLHttpRequest();
-    // xhttp.onload = () => {
-    //   $('#fieldsContainer').html('ciao');
+  function onClickComponentCard(caller, id) {
+    const modal = $('#componentModal')
+    
+    modal.modal('show')
+
+    $.ajax({
+      url: `/components/${id}`,
+      type: 'GET',
+      success: function (json_response) {
+        Object.entries(json_response).forEach(
+          ([field, value]) => modal.find(`#${field}`).val(value)
+        )
+        modal.find('#title').html(json_response.code)
+      }
+    })
+
+    // const xhttp = new XMLHttpRequest();
+    // xhttp.onload = function() {
+    //   console.log(this.response);
     // };
-    xhttp.open('GET', '/components/1893');
-    xhttp.send();
+    // xhttp.open('GET', '/components/1893');
+    // xhttp.send();
   }
 </script>
