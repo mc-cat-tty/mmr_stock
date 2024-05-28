@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %} MMR Stock | Home {% endblock %}
 
@@ -41,7 +42,7 @@
   <div class="sidepanel">
     <div class="card full-height bg-info-subtle">
       <h3 class="card-header">
-        U may want to start from {% load static %} <img src="{% static 'magic.png' %}">
+        U may want to start from <img src="{% static 'magic.png' %}">
       </h3>
       <div class="card-body overflow-auto">
         {% for r in recommended %}
