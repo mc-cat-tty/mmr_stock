@@ -4,8 +4,10 @@
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="title"> </h5>
-        <button type="button" class="close" data-dismiss="modal"></button>
+        <img class="me-3" id="picture" height="64px">
+
+        <h3 class="modal-title" id="title"> </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <div class="form-group" id="fieldsContainer">
@@ -22,7 +24,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
@@ -43,6 +45,7 @@
           ([field, value]) => modal.find(`#${field}`).val(value)
         )
         modal.find('#title').html(json_response.code)
+        modal.find('#picture').attr('src', json_response.picture)
       }
     })
 
