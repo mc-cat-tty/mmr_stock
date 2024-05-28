@@ -9,7 +9,7 @@
         <i class="bi bi-lock-fill" id="lock"></i>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="body">
         <div class="form-group" id="fieldsContainer">
 
           {% for field in modal_textual_fields %}
@@ -52,12 +52,13 @@
 
 <script>
   const modal = $('#componentModal');
+  const fieldsContainer = modal.find("#fieldsContainer");
   const State = Object.freeze({
     VIEW: 'view',
     EDIT: 'edit'
   });
   const alertHtml =
-    '<div class="alert alert-danger d-flex align-items-center mt-4" role="alert">'
+    '<div class="alert alert-danger d-flex align-items-center mt-4" role="alert" id="banner">'
     + '<i class="bi bi-exclamation-circle me-2" width="24" height="24" role="img"></i>'
     + '<div id="failedOperation"> Failed update </div>'
     + '</div>';
@@ -97,7 +98,7 @@
   }
 
   function addBanner(message) {
-    if (!modal.find("#failedOperation").length) modal.find("#fieldsContainer").append(alertHtml)
+    if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml)
     modal.find("#failedOperation").html(message)
   }
 
@@ -107,12 +108,15 @@
   
   function onClickComponentCard (caller, id) {
     modal.modal('show');
-    
-    let onResponse =
+
     $.ajax({
       url: `/components/${id}`,
       type: 'GET',
-      success: dynPopulate
+      success: dynPopulate,
+      error: () => {
+        addBanner("Server not available");
+        fieldsContainer.hide();
+      }
     });
   }
   
@@ -132,7 +136,9 @@
     modal.find('#title').html(json_response.code);
     modal.find('#picture').attr('src', json_response.picture);
     modal.find('#lock').show();
-    addBanner('Test');
+    
+    modal.find("#banner").remove();
+    fieldsContainer.show();
     toViewMode();
   }
 
