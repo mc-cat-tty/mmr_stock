@@ -19,7 +19,7 @@ class Component(models.Model):
     default=join('static', 'unknown_component.png'),
     blank=True
   )
-  datasheet_url = models.URLField(max_length=200, blank=True)
+  datasheet_url = models.URLField(max_length=2048, blank=True)
   quantity = models.PositiveSmallIntegerField()
 
   row = models.PositiveSmallIntegerField()

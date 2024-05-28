@@ -14,18 +14,22 @@
 
           {% for field in modal_textual_fields %}
           <div class="row mb-1">
-            <label class="col-sm-2 col-form-label"> {{ field|snake_to_capitalized }} </label>
+            <label class="col-sm-2 col-form-label"> {{ field.name|snake_to_capitalized }} </label>
             <div class="col-sm-10">
-              <input readonly type="text" class="form-control-plaintext" id="{{field}}Value">
+              {% if field.max_length > 100 %}
+                <textarea readonly type="text" class="form-control-plaintext" id="{{field.name}}Value"></textarea>
+              {% else %}
+                <input readonly type="text" class="form-control-plaintext" id="{{field.name}}Value">
+              {% endif %}
             </div>
           </div>
           {% endfor %}
 
           {% for field in modal_numeric_fields %}
           <div class="row mb-1">
-            <label class="col-sm-2 col-form-label"> {{ field|snake_to_capitalized }} </label>
+            <label class="col-sm-2 col-form-label"> {{ field.name|snake_to_capitalized }} </label>
             <div class="col-sm-10">
-              <input readonly type="number" class="form-control-plaintext" id="{{field}}Value">
+              <input readonly type="number" class="form-control-plaintext" id="{{field.name}}Value">
             </div>
           </div>
           {% endfor %}
@@ -46,7 +50,7 @@
         <button id="editBtn" type="button" class="btn btn-outline-secondary me-auto" onclick="onClickEdit(this)">
           <i class="bi bi-pencil"></i>
         </button>
-        <button id='cancelBtn' type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id='cancelBtn' type="button" class="btn btn-secondary" onclick="onClickCancel(this)">Close</button>
         <button id='saveBtn' type="button" class="btn btn-primary" onclick="onClickSave(this)">Save changes</button>
       </div>
     </div>
@@ -73,7 +77,9 @@
     );
 
     ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).hide());
-    $('#saveBtn').attr('class', 'btn btn-info')
+    $('#saveBtn')
+      .attr('class', 'btn btn-info')
+      .html('Save changes')
   }
 
   function toViewMode () {
@@ -85,7 +91,9 @@
     );
 
     ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).show());
-    $('#saveBtn').attr('class', 'btn btn-primary')
+    $('#saveBtn')
+      .attr('class', 'btn btn-primary')
+      .html('Update quantity')
 
     state = State.VIEW;
   }
@@ -108,6 +116,12 @@
     Object.entries(json_response).forEach(
       ([field, value]) => modal.find(`#${field}Value`).val(value)
     );
+
+    Object.entries(json_response)
+      .filter(([field, value]) => !value)
+      .forEach(
+        ([field, value]) => modal.find(`#${field}Value`).val('-')
+      )
     
     modal.find('#title').html(json_response.code);
     modal.find('#picture').attr('src', json_response.picture);
@@ -119,7 +133,27 @@
   }
 
   function onClickSave (caller) {
+    switch (state) {
+      case State.EDIT:
+        toViewMode();
+        break;
+      case State.VIEW:
+        modal.modal('hide');
+        break;
+    }
     toViewMode();
+  }
+
+  function onClickCancel (caller) {
+    switch (state) {
+      case State.EDIT:
+        toViewMode();
+        break;
+      case State.VIEW:
+        toViewMode();
+        modal.modal('hide');
+        break;
+    }
   }
 
   function onClickDel (caller) {

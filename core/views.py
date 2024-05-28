@@ -19,16 +19,11 @@ def home(request: HttpRequest) -> HttpResponse:
   )
 
   context = {
+    'pagename': 'Home',
     'recommended': Component.objects.all()[:20],
-    'components': Component.objects.all()[:9],
-    'modal_textual_fields': map(
-      attrgetter('name'),
-      component_text_fields
-    ),
-    'modal_numeric_fields': map(
-      attrgetter('name'),
-      component_numeric_fields
-    )
+    'components': Component.objects.all()[:12],
+    'modal_textual_fields': component_text_fields,
+    'modal_numeric_fields': component_numeric_fields
   }
 
   return render(request, template_name="home.html", context=context)
