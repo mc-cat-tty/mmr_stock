@@ -8,7 +8,8 @@ from django.shortcuts import render
 def home(request: HttpRequest) -> HttpResponse:
   context = {
     'recommended': Component.objects.all()[:20],
-    'components': Component.objects.all()[:9]
+    'components': Component.objects.all()[:9],
+    'modal_textual_fields': ('name', 'code', 'datasheet_url', 'quantity', 'row', 'column', 'depth')
   }
   return render(request, template_name="home.html", context=context)
 

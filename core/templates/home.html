@@ -3,24 +3,7 @@
 {% block title %} MMR Stock | Home {% endblock %}
 
 {% block content %}
-<!-- Component Modal -->
-<div class="modal fade" id="componentModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+{% include 'component_modal.html' %}
 
 <div class="row row-cols-md-2 m-3 d-flex">
   <!-- Left column -->
@@ -58,7 +41,7 @@
   <div class="sidepanel">
     <div class="card full-height bg-info-subtle">
       <h3 class="card-header">
-        For you {% load static %} <img src="{% static 'magic.png' %}">
+        U may want to start from {% load static %} <img src="{% static 'magic.png' %}">
       </h3>
       <div class="card-body overflow-auto">
         {% for r in recommended %}

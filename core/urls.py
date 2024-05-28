@@ -11,5 +11,5 @@ router.register(r'components', ComponentViewSet, r'components')
 app_name = "core"
 
 urlpatterns = [
-  path("home/", home, name='home')
+  path("", home, name='home')
 ] + router.urls
