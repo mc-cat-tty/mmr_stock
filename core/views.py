@@ -27,14 +27,6 @@ def home(request: HttpRequest) -> HttpResponse:
 
   return render(request, template_name="home.html", context=context)
 
-def favorites(request: HttpRequest) -> HttpResponse:
-  context = {
-    'pagename': 'Favorites',
-    'starred': Component.objects.all()
-  }
-
-  return render(request, template_name="starred.html", context=context)
-
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Component
