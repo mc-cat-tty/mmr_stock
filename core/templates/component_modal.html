@@ -131,7 +131,7 @@
     
     modal.find('#title').html(json_response.code);
     modal.find('#picture').attr('src', json_response.picture);
-    modal.find('#lock').show();
+    modal.find('#lock').css('visibility', json_response.protection ? 'visible' : 'hidden');
     
     modal.find("#banner").remove();
     fieldsContainer.show();

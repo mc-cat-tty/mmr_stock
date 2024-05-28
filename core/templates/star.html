@@ -7,10 +7,13 @@
     top-100 start-50
   {% endif %}
   ">
-  <button type="button" class="unstarred-badge btn btn-light btn-sm rounded-circle border-danger" onclick="onClickStar(this, event, {{id}})">
+
+  <button style="display:{{ preferred|yesno:'none,inline' }}" type="button" class="unstarred-badge btn btn-light btn-sm rounded-circle border-danger" onclick="onClickStar(this, event, {{id}})">
     <i class="bi bi-heart text-danger" id="lock"></i>
   </button>
-  <button style="display:none" type="button" class="starred-badge btn btn-danger btn-sm rounded-circle" onclick="onClickStar(this, event, {{id}})">
+
+  <button style="display:{{ preferred|yesno:'inline,none' }}" type="button" class="starred-badge btn btn-danger btn-sm rounded-circle" onclick="onClickStar(this, event, {{id}})">
     <i class="bi bi-heart-fill" id="lock"></i>
   </button>
+
 </span>

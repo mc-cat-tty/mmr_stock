@@ -5,7 +5,7 @@
   style="width:200px"
   onclick="onClickComponentCard(this, {{id}})"
   >
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+  <span style="display:{{ protection|yesno:'inline,none' }}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
     <i class="bi bi-lock-fill"></i>
   </span>
   {% include 'star.html' with position='bottom' %}
