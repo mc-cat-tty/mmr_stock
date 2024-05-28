@@ -21,6 +21,15 @@
           </div>
           {% endfor %}
 
+          {% for field in modal_numeric_fields %}
+          <div class="row">
+            <label class="col-sm-2 col-form-label"> {{ field|snake_to_capitalized }} </label>
+            <div class="col-sm-10">
+              <input readonly type="number" class="form-control-plaintext" id="{{field}}">
+            </div>
+          </div>
+          {% endfor %}
+
         </div>
       </div>
       <div class="modal-footer">
@@ -48,12 +57,5 @@
         modal.find('#picture').attr('src', json_response.picture)
       }
     })
-
-    // const xhttp = new XMLHttpRequest();
-    // xhttp.onload = function() {
-    //   console.log(this.response);
-    // };
-    // xhttp.open('GET', '/components/1893');
-    // xhttp.send();
   }
 </script>
