@@ -1,15 +1,16 @@
 <span class="
   position-absolute
+  translate-middle
   {% if position == 'side' %}
     top-0 start-0
   {% elif position == 'bottom' %}
     top-100 start-50
   {% endif %}
-  translate-middle">
-  <button id='unstarredBadge' type="button" class="btn btn-light btn-sm rounded-circle border-danger" onclick="onClickStar(this, event, {{id}})">
+  ">
+  <button type="button" class="unstarred-badge btn btn-light btn-sm rounded-circle border-danger" onclick="onClickStar(this, event, {{id}})">
     <i class="bi bi-heart text-danger" id="lock"></i>
   </button>
-  <button style="display:none" id='starredBadge' type="button" class="btn btn-danger btn-sm rounded-circle" onclick="onClickStar(this, event, {{id}})">
+  <button style="display:none" type="button" class="starred-badge btn btn-danger btn-sm rounded-circle" onclick="onClickStar(this, event, {{id}})">
     <i class="bi bi-heart-fill" id="lock"></i>
   </button>
 </span>

@@ -101,10 +101,6 @@
     if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml)
     modal.find("#failedOperation").html(message)
   }
-
-  function onClickStar(caller, event, id) {
-    event.stopPropagation();
-  }
   
   function onClickComponentCard (caller, id) {
     modal.modal('show');
@@ -172,5 +168,11 @@
 
   function onClickDel (caller) {
 
+  }
+
+  function onClickStar(caller, event, id) {
+    event.stopPropagation();
+    $(caller).parent().find('.unstarred-badge').hide()
+    $(caller).parent().find('.starred-badge').show()
   }
 </script>
