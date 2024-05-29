@@ -1,6 +1,6 @@
 from django.urls import path
 from django.urls import path
-from .views import favorites, StarCreateAPIView
+from .views import StarAPIView
 
 STATIC_URL = "/media/static"
 app_name = "analytics"
@@ -14,5 +14,5 @@ from .views import Star
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'favorites', StarCreateAPIView, r"favorites")
+router.register(r'favorites', StarAPIView, r"favorites")
 urlpatterns = router.urls
