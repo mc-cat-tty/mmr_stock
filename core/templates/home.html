@@ -38,20 +38,23 @@
     </div>
   </div>
 
-  <!-- Right column -->
-  <div class="sidepanel">
-    <div class="card full-height bg-info-subtle">
-      <h3 class="card-header">
-        U may want to start from <img src="{% static 'magic.png' %}">
-      </h3>
-      <div class="card-body overflow-auto">
-        {% for r in recommended %}
-          {% include "component_card_minimal.html" with preferred=r|is_in:favorite_components component=r %}
-        {% endfor %}
+  {% if pagename == 'Home' %}
+    <!-- Right column -->
+    <div class="sidepanel">
+      <div class="card full-height bg-info-subtle">
+        <h3 class="card-header">
+          U may want to start from <img src="{% static 'magic.png' %}">
+        </h3>
+        <div class="card-body overflow-auto">
+          {% for r in recommended %}
+            {% include "component_card_minimal.html" with preferred=r|is_in:favorite_components component=r %}
+          {% endfor %}
+        </div>
       </div>
     </div>
+  {% endif %}
+
   </div>
-</div>
 
 <style>
 .full-height {
@@ -62,9 +65,15 @@
   width: 400px;
 }
 
+{% if pagename == 'Home' %}
 .fill-width {
   width: calc(100vw - 450px);
 }
+{% else %}
+.fill-width {
+  width: 100vw;
+}
+{% endif %}
 </style>
 
 {% endblock %}

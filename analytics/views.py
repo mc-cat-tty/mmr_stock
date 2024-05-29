@@ -38,8 +38,4 @@ class StarAPI(viewsets.ViewSet):
 
   def destroy(self, request: Request) -> Response:
     return self.toggle_star(request)
-  
-  def list(self, request: Request) -> Response:
-    return Response(status=status.HTTP_200_OK)
-
 

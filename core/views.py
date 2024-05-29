@@ -9,17 +9,18 @@ from django.views.generic.list import ListView
 class HomeView(ListView):
   model = Component
   template_name="home.html"
-  COMPONENT_TEXT_FIELDS = filter(
-    lambda field: isinstance(field, CharField) or isinstance(field, TextField),
-    Component._meta.fields
-  )
-  COMPONENT_NUMERIC_FIELDS = filter(
-    lambda field: isinstance(field, IntegerField) and field.name != 'id',
-    Component._meta.fields
-  )
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
+
+    COMPONENT_TEXT_FIELDS = filter(
+      lambda field: isinstance(field, CharField) or isinstance(field, TextField),
+      Component._meta.fields
+    )
+    COMPONENT_NUMERIC_FIELDS = filter(
+      lambda field: isinstance(field, IntegerField) and field.name != 'id',
+      Component._meta.fields
+    )
     
     favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
@@ -27,16 +28,29 @@ class HomeView(ListView):
       'pagename': 'Home',
       'recommended': Component.objects.all()[:20],
       'favorite_components': favorite_components,
-      'modal_textual_fields': self.COMPONENT_TEXT_FIELDS,
-      'modal_numeric_fields': self.COMPONENT_NUMERIC_FIELDS
+      'modal_textual_fields': COMPONENT_TEXT_FIELDS,
+      'modal_numeric_fields': COMPONENT_NUMERIC_FIELDS
     }
 
     return context | extra_context
 
+class StarredHomeView(HomeView):
+  def get_queryset(self):
+    p = Profile.objects.get(user = self.request.user)
+    return self.model.objects.filter(stars=p)
+  
+  def get_context_data(self, **kwargs):
+    return super().get_context_data(**kwargs) | {'pagename': 'Favorites'}
+
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Component
-    fields = ('id', 'name', 'code', 'picture', 'datasheet_url', 'quantity', 'row', 'column', 'depth', 'protection')
+    fields = (
+      'id', 'name', 'code',
+      'picture', 'datasheet_url',
+      'quantity', 'row', 'column',
+      'depth', 'protection'
+    )
 
 class ComponentAPI(viewsets.ModelViewSet):
   queryset = Component.objects.all()
