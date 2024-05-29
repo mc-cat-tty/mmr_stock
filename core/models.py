@@ -40,21 +40,6 @@ class Profile(models.Model):
     blank=True
   )
 
-class Restriction(models.Model):
-  """
-  Entity that models a usage limition.
-  The restriction can be absolute or periodic (i.e. after a certain period,
-  the restriction resets, and the availability becomes equal to quantity again).
-  Indeed, if reset_period is null, the restriction is absolute, otherwise
-  the restriction becomes a "usage throttling".
-  """
-  class Meta:
-    ordering = ['-date']
-  component = models.ForeignKey(Component, on_delete=models.CASCADE)
-  quantity = models.PositiveSmallIntegerField()
-  date = models.DateTimeField()
-  reset_period = models.DurationField(null=True, blank=True)
-
 class Request(models.Model):
   """
   Relationship between user and component that models an enqueued request
