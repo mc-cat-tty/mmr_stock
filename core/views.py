@@ -1,40 +1,43 @@
 from django.shortcuts import render
 from rest_framework import serializers, viewsets
 from django.http import HttpResponse, HttpRequest
-from .models import Component, Profile
 from django.shortcuts import render
 from django.db.models import CharField, TextField, IntegerField
+from .models import Component, Profile
+from django.views.generic.list import ListView
 
-
-def home(request: HttpRequest) -> HttpResponse:
-  component_text_fields = filter(
+class HomeView(ListView):
+  model = Component
+  template_name="home.html"
+  COMPONENT_TEXT_FIELDS = filter(
     lambda field: isinstance(field, CharField) or isinstance(field, TextField),
     Component._meta.fields
   )
-
-  component_numeric_fields = filter(
+  COMPONENT_NUMERIC_FIELDS = filter(
     lambda field: isinstance(field, IntegerField) and field.name != 'id',
     Component._meta.fields
   )
 
-  favorite_components = Profile.objects.get(user=request.user).stars.all()
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    
+    favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
-  context = {
-    'pagename': 'Home',
-    'recommended': Component.objects.all()[:20],
-    'components': Component.objects.all()[:12],
-    'favorite_components': favorite_components,
-    'modal_textual_fields': component_text_fields,
-    'modal_numeric_fields': component_numeric_fields
-  }
+    extra_context = {
+      'pagename': 'Home',
+      'recommended': Component.objects.all()[:20],
+      'favorite_components': favorite_components,
+      'modal_textual_fields': self.COMPONENT_TEXT_FIELDS,
+      'modal_numeric_fields': self.COMPONENT_NUMERIC_FIELDS
+    }
 
-  return render(request, template_name="home.html", context=context)
+    return context | extra_context
 
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Component
     fields = ('id', 'name', 'code', 'picture', 'datasheet_url', 'quantity', 'row', 'column', 'depth', 'protection')
 
-class ComponentViewSet(viewsets.ModelViewSet):
+class ComponentAPI(viewsets.ModelViewSet):
   queryset = Component.objects.all()
-  serializer_class = ComponentSerializer
+  serializer_class = ComponentSerializer    

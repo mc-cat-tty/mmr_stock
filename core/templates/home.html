@@ -20,7 +20,7 @@
       <div class="card-body overflow-auto">
         <div class="container">
           <div class="row row-cols-auto g-3">
-            {% for c in components %}
+            {% for c in object_list %}
               <div class="col d-flex">
               {% include "component_card.html" with preferred=c|is_in:favorite_components component=c %} 
               </div>
