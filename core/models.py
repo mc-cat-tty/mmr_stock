@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from os.path import join
 
 class Component(models.Model):
@@ -27,11 +28,12 @@ class Component(models.Model):
 
   protection = models.BooleanField(default=False, blank=True)
 
-class User(models.Model):
+class Profile(models.Model):
   """
-  Entity that models a user.
+  Entity that models a profile.
+  These fields are added to the standard django user
   """
-  name = models.CharField(max_length=100)
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
   propic = models.ImageField(
     upload_to='users_pics',
     default=join('static', 'unknown_user.png'),

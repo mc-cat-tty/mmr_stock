@@ -14,5 +14,5 @@ from .views import Star
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'favorites', StarAPIView, r"favorites")
+router.register(r'favorites', StarAPIView, "favorites")
 urlpatterns = router.urls

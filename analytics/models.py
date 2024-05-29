@@ -1,5 +1,7 @@
 from django.db import models
-from core.models import Component, User
+from core.models import Component
+from django.contrib.auth.models import User
+
 
 class Star(models.Model):
   """
