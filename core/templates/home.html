@@ -22,7 +22,7 @@
           <div class="row row-cols-auto g-3">
             {% for c in components %}
               <div class="col d-flex">
-              {% include "component_card.html" with preferred=c|is_in:favorite_components name=c.name img=c.picture code=c.code quantity=c.quantity id=c.id protection=c.protection %} 
+              {% include "component_card.html" with preferred=c|is_in:favorite_components component=c %} 
               </div>
             {% endfor %}
           </div>
@@ -46,7 +46,7 @@
       </h3>
       <div class="card-body overflow-auto">
         {% for r in recommended %}
-          {% include "component_card_minimal.html" with name=r.name img=r.picture id=r.id %}
+          {% include "component_card_minimal.html" with preferred=r|is_in:favorite_components component=r %}
         {% endfor %}
       </div>
     </div>

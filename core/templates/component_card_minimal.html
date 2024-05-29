@@ -2,14 +2,14 @@
 
 <div
   class="shadow-sm card flex-row mb-3 text-bg-light align-middle component-card"
-  onclick="onClickComponentCard(this, {{id}})"
+  onclick="onClickComponentCard(this, {{component.id}})"
   >
   {% include 'star.html' with position='side' %}
 
   <div class="card-image">
     <img
       class="card-img-left align-middle p-1"
-      src="{% static img %}"
+      src="{% static component.picture %}"
       title="{{ name }}"
       width="128px"
       height="128px"
@@ -18,7 +18,7 @@
   </div>
   <div class="card-body p-1 d-flex align-items-center">
     <p class="card-text p-0 m-0">
-      <div class="fw-bold"> {{ name|slice:":60" }} {% if name|length > 60 %} ... {% endif %} </div>
+      <div class="fw-bold"> {{ component.name|slice:":60" }} {% if component.name|length > 60 %} ... {% endif %} </div>
     </p>
   </div>
 </div>

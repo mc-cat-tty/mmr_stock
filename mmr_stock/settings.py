@@ -39,12 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'analytics.apps.AnalyticsConfig',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,3 +133,15 @@ STATICFILES_DIRS = [join(MEDIA_ROOT, 'static/'), MEDIA_ROOT]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_PROFILE_MODULE = 'core.Profile'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.request import Request
 from core.models import Component, Profile
@@ -15,26 +15,33 @@ def favorites(request: HttpRequest) -> HttpResponse:
 class StarAPIView(viewsets.ViewSet):
   COMPONENT_PK_KEY: str = 'component_pk'
 
-  def create(self, request: Request):
+  def toggle_star(self, request: Request):
     try:
       component_pk = int(request.data[self.COMPONENT_PK_KEY])
       component = Component.objects.get(pk=component_pk)
     except:
-      return Response(status=400)
+      return Response(status=status.HTTP_400_BAD_REQUEST)
 
     try:
       profile = Profile.objects.get(user=request.user)
-      profile.stars.add(component)
+      isOn = profile.stars.filter(pk=component_pk).exists()
+      if isOn: profile.stars.remove(component)
+      else: profile.stars.add(component)
     except:
-      return Response(status=500)
+      return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    return Response(status=200)
+    response_data = {"status": not isOn}
+    return Response(data=response_data, status=status.HTTP_200_OK)
+  
+  def create(self, request: Request):
+    return self.toggle_star(request)
+
+  def destroy(self, request: Request):
+    return self.toggle_star(request)
   
   def list(self, request: Request):
-    return Response(status=200)
+    return Response(status=status.HTTP_200_OK)
 
   def retrieve(self, request: Request, pk=None):
     pass
 
-  def destroy(self, request: Request, pk=None):
-    pass
