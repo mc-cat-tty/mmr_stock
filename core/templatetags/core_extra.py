@@ -12,3 +12,7 @@ def snake_to_capitalized(text: str) -> str:
       text.split('_')
     )
   )
+
+@register.filter
+def is_in(value, arg):
+  return value in arg

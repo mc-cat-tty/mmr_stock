@@ -1,6 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from os.path import join
+
+def create_profile(sender, instance, created, *args, **kwargs):
+  if created:
+    Profile.objects.create(user=instance)
+
+post_save.connect(create_profile, sender=User)
 
 class Component(models.Model):
   """
@@ -28,6 +35,9 @@ class Component(models.Model):
 
   protection = models.BooleanField(default=False, blank=True)
 
+  def __str__(self):
+    return f"{self.pk} {self.name} {self.code}"
+
 class Profile(models.Model):
   """
   Entity that models a profile.
@@ -43,6 +53,9 @@ class Profile(models.Model):
     blank=True
   )
   stars = models.ManyToManyField(Component, blank=True, related_name='stars')
+
+  def __str__(self):
+    return f"{self.user.pk} {self.user.username}"
 
 class Request(models.Model):
   """

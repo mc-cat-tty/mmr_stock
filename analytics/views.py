@@ -16,17 +16,17 @@ class StarAPIView(viewsets.ViewSet):
   COMPONENT_PK_KEY: str = 'component_pk'
 
   def create(self, request: Request):
-    try: component_pk = int(request.data[self.COMPONENT_PK_KEY])
-    except: return Response(status=400)
+    try:
+      component_pk = int(request.data[self.COMPONENT_PK_KEY])
+      component = Component.objects.get(pk=component_pk)
+    except:
+      return Response(status=400)
 
-    try: component = Component.objects.get(pk=component_pk)
-    except: return Response(status=404)
-    
-    profile = Profile.objects.get(user=request.user)
-    profile.stars.add(component)
-    # try:
-    #   request.user.stars.add(component)
-    # except: return Response(status=500)
+    try:
+      profile = Profile.objects.get(user=request.user)
+      profile.stars.add(component)
+    except:
+      return Response(status=500)
 
     return Response(status=200)
   

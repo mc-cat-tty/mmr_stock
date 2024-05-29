@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import serializers, viewsets
 from django.http import HttpResponse, HttpRequest
-from .models import Component
+from .models import Component, Profile
 from django.shortcuts import render
 from django.db.models import CharField, TextField, IntegerField
 
@@ -17,14 +17,15 @@ def home(request: HttpRequest) -> HttpResponse:
     Component._meta.fields
   )
 
-  print(Component.objects.all()[0].stars)
+  favorite_components = Profile.objects.get(user=request.user).stars.all()
 
   context = {
     'pagename': 'Home',
     'recommended': Component.objects.all()[:20],
     'components': Component.objects.all()[:12],
+    'favorite_components': favorite_components,
     'modal_textual_fields': component_text_fields,
-    'modal_numeric_fields': component_numeric_fields,
+    'modal_numeric_fields': component_numeric_fields
   }
 
   return render(request, template_name="home.html", context=context)
