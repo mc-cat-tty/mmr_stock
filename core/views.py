@@ -34,7 +34,7 @@ class HomeView(ListView):
 
     return context | extra_context
 
-class StarredHomeView(HomeView):
+class FavoritesView(HomeView):
   def get_queryset(self):
     p = Profile.objects.get(user = self.request.user)
     return self.model.objects.filter(stars=p)
