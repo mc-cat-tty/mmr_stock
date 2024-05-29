@@ -32,6 +32,9 @@ class Profile(models.Model):
   """
   Entity that models a profile.
   These fields are added to the standard django user
+  A star is an entity that models a many to many preference (called
+  'star', visually represented as a heart) relationship
+  between a user and a component.
   """
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   propic = models.ImageField(
@@ -39,6 +42,7 @@ class Profile(models.Model):
     default=join('static', 'unknown_user.png'),
     blank=True
   )
+  stars = models.ManyToManyField(Component, blank=True, related_name='stars')
 
 class Request(models.Model):
   """

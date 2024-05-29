@@ -22,7 +22,7 @@
           <div class="row row-cols-auto g-3">
             {% for c in components %}
               <div class="col d-flex">
-              {% include "component_card.html" with name=c.name img=c.picture code=c.code quantity=c.quantity id=c.id protection=c.protection %} 
+              {% include "component_card.html" with preferred=c.star name=c.name img=c.picture code=c.code quantity=c.quantity id=c.id protection=c.protection %} 
               </div>
             {% endfor %}
           </div>

@@ -17,6 +17,8 @@ def home(request: HttpRequest) -> HttpResponse:
     Component._meta.fields
   )
 
+  print(Component.objects.all()[0].stars)
+
   context = {
     'pagename': 'Home',
     'recommended': Component.objects.all()[:20],
