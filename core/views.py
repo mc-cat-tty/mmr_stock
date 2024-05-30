@@ -9,15 +9,21 @@ from django.views.generic.list import ListView
 class HomeView(ListView):
   model = Component
   template_name="home.html"
+  form_data = {}
   
   def get_queryset(self):
     queryset = super().get_queryset()
 
-    query = self.request.GET.get('query', 'a')
+    query = self.request.GET.get('query', '')
     try:
       min_quantity = int(self.request.GET.get('min', 0))
     except:
       min_quantity = 0
+
+    self.form_data = {
+      'min_quantity': min_quantity,
+      'query': query
+    }
 
     return (
       queryset.filter(code__icontains=query)
@@ -46,7 +52,7 @@ class HomeView(ListView):
       'modal_numeric_fields': COMPONENT_NUMERIC_FIELDS
     }
 
-    return context | extra_context
+    return context | extra_context | self.form_data
 
 class FavoritesView(HomeView):
   def get_queryset(self):
