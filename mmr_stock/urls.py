@@ -23,5 +23,6 @@ from .settings import MEDIA_URL, MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('analytics/', include('analytics.urls'))
+    path('analytics/', include('analytics.urls')),
+    path('dash/', include('dash.urls'))
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)

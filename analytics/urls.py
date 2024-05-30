@@ -1,5 +1,4 @@
 from django.urls import path
-from django.urls import path
 from .views import StarAPI
 from rest_framework import routers
 
