@@ -53,6 +53,8 @@ class Profile(models.Model):
     blank=True
   )
   stars = models.ManyToManyField(Component, blank=True, related_name='stars')
+  requests = models.ManyToManyField(Component, through='Request', blank=True, related_name='requests')
+  uses = models.ManyToManyField(Component, through='Use', blank=True, related_name='uses')
 
   def __str__(self):
     return f"{self.user.pk} {self.user.username}"
@@ -69,8 +71,8 @@ class Request(models.Model):
   it remains in Request relationship as log of failed request.
   """
   class Meta:
-    ordering = ["-date", "user"]
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ordering = ["-date", "profile"]
+  profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
   processed = models.BooleanField(default=False, blank=True)
@@ -82,6 +84,6 @@ class Use(models.Model):
   """
   class Meta:
     ordering = ["-date"]
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
