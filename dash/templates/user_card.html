@@ -1,26 +1,25 @@
 {% load static %}
 
-<div
-  class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
-  onclick="onClickUser(this, {{profile.user.id}})"
-  >
-  <div class="card-image">
-    <img
-      class="card-img-left align-middle p-1"
-      src="{% static profile.propic %}"
-      title="{{ profile.user.username }}"
-      width="64px"
-      height="64px"
+<a href="?id={{profile.user.id}}" style="text-decoration:none">
+  <div
+    class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
     >
-    <div class="image-overlay"></div>
+    <div class="card-image">
+      <img
+        class="card-img-left align-middle p-1"
+        src="{% static profile.propic %}"
+        title="{{ profile.user.username }}"
+        width="64px"
+        height="64px"
+      >
+      <div class="image-overlay"></div>
+    </div>
+    <div class="card-body p-1 ms-3 d-flex align-items-center">
+      <p class="card-text p-0 m-0">
+        <div class="fw-bold"> {{ profile.user.username }} </div>
+        <div class="fw-bold"> {{ profile.user.first_name }} </div>
+        <div class="fw-bold"> {{ profile.user.last_name }} </div>
+      </p>
+    </div>
   </div>
-  <div class="card-body p-1 ms-3 d-flex align-items-center">
-    <p class="card-text p-0 m-0">
-      <div class="fw-bold"> {{ profile.user.username }} </div>
-      <div class="fw-bold"> {{ profile.user.first_name }} </div>
-      <div class="fw-bold"> {{ profile.user.last_name }} </div>
-    </p>
-  </div>
-</div>
-
-
+</a>
