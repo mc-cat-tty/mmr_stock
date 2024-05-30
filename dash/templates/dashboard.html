@@ -6,7 +6,6 @@
 {% block content %}
 
 <div class="row row-cols-md-2 m-3 d-flex justify-content-center align-items-center full-height">
-  <!-- Left column -->
   <div class="w-50" style="min-width: 512px">
     <div class="card p-4 card-height">
       <div class="card-title">
@@ -23,7 +22,7 @@
         <h6 class="row ps-3 pt-1"> {{ object_list.count }} users </h6>
       </div>
       <div class="card-body overflow-auto">
-        <form method="get" class="container">
+        <form class="container">
           <!-- All Users Card -->
           <a href="user/0" style="text-decoration:none">
             <div
@@ -51,12 +50,10 @@
             {% include "user_card.html" %}
           {% endfor %}
         </div>
-      </div>
     </div>
-
   </div>
+</div>
 
-  </div>
 
 <style>
 .full-height {

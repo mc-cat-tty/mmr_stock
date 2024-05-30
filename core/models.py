@@ -75,6 +75,7 @@ class Request(models.Model):
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
+  quantity = models.PositiveSmallIntegerField()
   approved = models.BooleanField(default=False, blank=True)
 
 class Use(models.Model):
@@ -87,3 +88,5 @@ class Use(models.Model):
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
+  quantity = models.PositiveSmallIntegerField()
+

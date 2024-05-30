@@ -1,4 +1,5 @@
 from re import S
+from urllib import request
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
@@ -24,9 +25,19 @@ class DashView(ListView):
 class DashDetailView(TemplateView):
   template_name="dashboard_detail.html"
 
+
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
+    username = "All Users"
+
+    if id > 0:
+      request_profile = Profile.objects.get(user=self.request.user)
+      username = request_profile.user.username
+      uses = Use.objects.filter(profile=request_profile)
+      requests = Request.objects.filter(profile=request_profile)
+  
     return {
-      'uses': ...,
-      'incoming_requests': ...
+      'uses': uses,
+      'requests': requests,
+      'pagename': f'Dashboard {username}'
     }

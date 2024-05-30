@@ -1,3 +1,4 @@
+from statistics import quantiles
 from django.db.models import CharField, TextField, IntegerField
 from django.views.generic.list import ListView
 from django.utils import timezone
@@ -99,14 +100,16 @@ class ComponentAPI(
       Use.objects.create(
         profile=Profile.objects.get(user=self.request.user),
         component=component,
-        date=timezone.now()
+        date=timezone.now(),
+        quantity=requested_quantity
       )
       action = 'get'
     else:
       Request.objects.create(
         profile=Profile.objects.get(user=self.request.user),
         component=component,
-        date=timezone.now()
+        date=timezone.now(),
+        quantity=requested_quantity
       )
       action = 'request'
 

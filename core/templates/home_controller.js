@@ -12,9 +12,9 @@ const alertHtml =
 var fields;
 var state = State.VIEW;
 var currentId;
-const headers = {'X-CSRFToken': '{{ csrf_token }}'};
+const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
 
-function toEditMode () {
+function toEditMode() {
   state = State.EDIT;
 
   fields.forEach(
@@ -28,7 +28,7 @@ function toEditMode () {
   modal.find('#saveBtn').show()
 }
 
-function toViewMode () {
+function toViewMode() {
   fields.forEach(
     field => modal
       .find(`#${field}Value`)
@@ -42,7 +42,7 @@ function toViewMode () {
   state = State.VIEW;
 }
 
-function addBanner(message, fail=true) {
+function addBanner(message, fail = true) {
   if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml)
   modal.find("#failedOperation").html(message)
   if (fail)
@@ -55,7 +55,7 @@ function removeBanner() {
   modal.find("#banner").remove()
 }
 
-function onClickComponentCard (caller, id) {
+function onClickComponentCard(caller, id) {
   modal.modal('show');
 
   $.ajax({
@@ -72,7 +72,7 @@ function onClickComponentCard (caller, id) {
   currentId = id;
 }
 
-function dynPopulate (json_response) {
+function dynPopulate(json_response) {
   fields = Object.keys(json_response);
 
   Object.entries(json_response).forEach(
@@ -80,23 +80,23 @@ function dynPopulate (json_response) {
   );
 
   Object.entries(json_response)
-    .filter(([, value]) => typeof(value) != 'number' && !value)
+    .filter(([, value]) => typeof (value) != 'number' && !value)
     .forEach(
       ([field]) => modal.find(`#${field}Value`).val('-')
     )
-  
+
   modal.find('#title').html(json_response.code);
   modal.find('#picture').attr('src', json_response.picture);
   modal.find('#lock').css('visibility', json_response.protection ? 'visible' : 'hidden');
   if (json_response.protection) modal.find('#getBtn').html("Request").attr('class', 'btn btn-warning col-md-2')
   else modal.find('#getBtn').html("Get").attr('class', 'btn btn-primary col-md-1')
-  
+
   modal.find("#banner").remove();
   fieldsContainer.show();
   toViewMode();
 }
 
-function onClickEdit (caller) {
+function onClickEdit(caller) {
   toEditMode();
 }
 
@@ -104,18 +104,18 @@ function getModalData() {
   return Object.fromEntries(
     fields
       .map(field => [field, $(`#${field}Value`).val()])
-      .filter(([, val]) => !!val && val!='-')
+      .filter(([, val]) => !!val && val != '-')
   );
 }
 
-function onClickSave (caller) {
+function onClickSave(caller) {
   switch (state) {
     case State.EDIT:
       $.ajax({
         url: `/components/${currentId}/`,
         type: 'PUT',
         headers: headers,
-        data: {pk: currentId, ...getModalData()},
+        data: { pk: currentId, ...getModalData() },
         success: () => removeBanner(),
         error: (response) => addBanner(response.responseText)
       });
@@ -129,7 +129,7 @@ function onClickSave (caller) {
   toViewMode();
 }
 
-function onClickCancel (caller) {
+function onClickCancel(caller) {
   switch (state) {
     case State.EDIT:
       toViewMode();
@@ -140,7 +140,7 @@ function onClickCancel (caller) {
   }
 }
 
-function onClickDel (caller) {
+function onClickDel(caller) {
   $.ajax({
     url: `/components/${currentId}/`,
     type: 'DELETE',
@@ -156,8 +156,8 @@ function onClickDel (caller) {
 function onClickStar(caller, event, id) {
   event.stopPropagation();
 
-  const data = {component_pk: id};
-  
+  const data = { component_pk: id };
+
   $.ajax({
     url: 'analytics/favorites/',
     type: 'POST',
@@ -184,7 +184,7 @@ function onClickGet(caller) {
     url: `components/${currentId}/`,
     type: "PATCH",
     headers: headers,
-    data: {quantity: $('#getComponentsValue').val()},
+    data: { quantity: $('#getComponentsValue').val() },
     success: (response) => {
       addBanner(`You just ${response.action == 'get' ? "got" : "requested"} ${response.quantity} components. Congratulations!`, false);
       $('#quantityValue').val($('#quantityValue').val() - $('#getComponentsValue').val());
