@@ -25,9 +25,9 @@ class DashView(ListView):
 class DashDetailView(TemplateView):
   template_name="dashboard_detail.html"
 
-
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
+    todo = 'todo' in self.request.GET
     username = "All Users"
 
     if id > 0:
@@ -38,6 +38,7 @@ class DashDetailView(TemplateView):
   
     return {
       'uses': uses,
-      'requests': requests,
-      'pagename': f'Dashboard {username}'
+      'requests': requests.filter(approved=None) if todo else requests,
+      'pagename': f'Dashboard {username}',
+      'todo': todo
     }

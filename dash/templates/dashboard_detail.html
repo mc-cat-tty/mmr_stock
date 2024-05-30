@@ -23,7 +23,11 @@
   <div class="col-lg-7">
     <div class="card p-4 full-height bg-warning-subtle" style="min-width: 200px; max-width: 1000px">
       <div class="card-title">
-        <h4 class="row d-flex justify-content-center pb-2">Incoming requests</h4>
+        <h4 class="row d-flex justify-content-center">Incoming requests</h4>
+        <form method="get">
+          <input onchange="this.form.submit()" class="form-check-input" type="checkbox" value="" id="unapprovedFilterCheckbox" name="todo" {% if todo %} checked {% endif %}>
+          <label class="form-check-label" for="unapprovedFilterCheckbox"> Not yet approved </label>
+        </form>
       </div>
       <div class="card-body overflow-auto">
           {% for request in requests %}

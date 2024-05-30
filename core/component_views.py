@@ -24,7 +24,7 @@ class ComponentAPI(
   queryset = Component.objects.all()
   serializer_class = ComponentSerializer
 
-  def partial_update(self, request: Request, *args, **kwargs):
+  def partial_update(self, request: Request, *args, **kwargs) -> Response:
     pk = kwargs.get('pk')
     component = Component.objects.get(pk=pk)
     available_quantity = component.quantity

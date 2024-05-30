@@ -14,7 +14,8 @@ function onClickRequest(caller, id, approved=false) {
           "class",
           requst_card_classes
           + (response.approved ? ' bg-success-subtle' : ' bg-danger-subtle')
-        )
+        );
+      $(caller).parent().hide()
     }
   });
 }

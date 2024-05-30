@@ -76,7 +76,7 @@ class Request(models.Model):
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
   quantity = models.PositiveSmallIntegerField()
-  approved = models.BooleanField(default=False, blank=True)
+  approved = models.BooleanField(null=True, blank=True)
 
 class Use(models.Model):
   """

@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle">
+<div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle {% if request.approved == True %} bg-success-subtle {% elif request.approved == False %} bg-danger-subtle {% endif %}">
   <div class="row ms-1 text-muted font-monospace">
     {{ request.date|date:"SHORT_DATE_FORMAT" }} {{ request.date|time:"G:i" }}
     <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
@@ -24,8 +24,10 @@
       {{ request.component.code }}
     </p>
   </div>
+  {% if request.approved == None %}
   <div class="ms-auto">
     <button type="button" class="btn btn-danger btn-sm" onclick="onClickRequest(this, {{request.id}}, false)">Reject</button>
     <button type="button" class="btn btn-success btn-sm pb-1" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>
   </div>
+  {% endif %}
 </div>

@@ -52,7 +52,7 @@
         <div class="navbar-nav">
           <a class="nav-link" href="#">
             {% if user.is_authenticated %}
-            {{user|snake_to_capitalized}}
+            {{user}}
             {% else %}
             Login
             {% endif %}
