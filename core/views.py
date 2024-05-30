@@ -9,6 +9,17 @@ from django.views.generic.list import ListView
 class HomeView(ListView):
   model = Component
   template_name="home.html"
+  
+  def get_queryset(self):
+    queryset = super().get_queryset()
+
+    query = self.request.GET.get('q')
+    if not query: query = ''
+
+    return (
+      queryset.filter(code__icontains=query)
+      | queryset.filter(name__icontains=query)
+    )
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -36,8 +47,9 @@ class HomeView(ListView):
 
 class FavoritesView(HomeView):
   def get_queryset(self):
+    queryset = super().get_queryset()
     p = Profile.objects.get(user = self.request.user)
-    return self.model.objects.filter(stars=p)
+    return queryset.filter(stars=p)
   
   def get_context_data(self, **kwargs):
     return super().get_context_data(**kwargs) | {'pagename': 'Favorites'}

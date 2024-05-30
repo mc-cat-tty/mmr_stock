@@ -12,7 +12,8 @@
     <div class="card p-4 full-height">
       <div class="card-title">
         <!-- Searchbar -->
-        <form class="d-flex mb-1 sticky-top" role="search">
+        <form class="d-flex mb-1 sticky-top" role="search" method="post">
+          {% csrf_token %}
           <input class="form-control me-2" type="search" placeholder="Search a component" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
