@@ -75,7 +75,7 @@ class Request(models.Model):
   profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
   component = models.ForeignKey(Component, on_delete=models.CASCADE)
   date = models.DateTimeField()
-  processed = models.BooleanField(default=False, blank=True)
+  approved = models.BooleanField(default=False, blank=True)
 
 class Use(models.Model):
   """
