@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers, viewsets
-from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.request import Request
 from django.db.models import CharField, TextField, IntegerField
 from .models import Component, Profile
 from django.views.generic.list import ListView
@@ -75,4 +76,4 @@ class ComponentSerializer(serializers.ModelSerializer):
 
 class ComponentAPI(viewsets.ModelViewSet):
   queryset = Component.objects.all()
-  serializer_class = ComponentSerializer    
+  serializer_class = ComponentSerializer

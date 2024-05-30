@@ -11,6 +11,8 @@ const alertHtml =
   + '</div>';
 var fields;
 var state = State.VIEW;
+var currentId;
+const headers = {'X-CSRFToken': '{{ csrf_token }}'};
 
 function toEditMode () {
   state = State.EDIT;
@@ -61,6 +63,8 @@ function onClickComponentCard (caller, id) {
       fieldsContainer.hide();
     }
   });
+
+  currentId = id;
 }
 
 function dynPopulate (json_response) {
@@ -89,11 +93,27 @@ function onClickEdit (caller) {
   toEditMode();
 }
 
+function getModalData() {
+  return Object.fromEntries(
+    fields
+      .map(field => [field, $(`#${field}Value`).val()])
+      .filter(([field, val]) => !!val)
+  );
+}
+
 function onClickSave (caller) {
   switch (state) {
     case State.EDIT:
+      $.ajax({
+        url: `/components/${currentId}/`,
+        type: 'PUT',
+        headers: headers,
+        data: {pk: currentId, ...getModalData()},
+        error: (response) => addBanner(response.responseText)
+      });
       toViewMode();
       break;
+
     case State.VIEW:
       modal.modal('hide');
       break;
@@ -120,7 +140,6 @@ function onClickDel (caller) {
 function onClickStar(caller, event, id) {
   event.stopPropagation();
 
-  const headers = {'X-CSRFToken': '{{ csrf_token }}'};
   const data = {component_pk: id};
   
   $.ajax({
