@@ -27,6 +27,7 @@
           <!-- All Users Card -->
           <div
           class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
+          onclick="onClickUser(this, 0)"
           >
             <div class="card-image">
               <img
@@ -65,5 +66,9 @@
   height: calc(75vh - 120px);
 }
 </style>
+
+<script>
+  {% include 'dash_controller.js' %}
+</script>
 
 {% endblock %}
