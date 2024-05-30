@@ -12,10 +12,16 @@
     <div class="card p-4 full-height">
       <div class="card-title">
         <!-- Searchbar -->
-        <form class="d-flex mb-1 sticky-top" role="search" method="post">
-          {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search a component" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Search</button>
+        <form class="d-flex mb-1 sticky-top row g-2" role="search" method="get">
+          <div class="col col-md-7">
+            <input name="query" class="form-control" type="search" placeholder="Search a component">
+          </div>
+          <div class="col col-md-3">
+            <input name="min" class="form-control" type="number" placeholder="Min stock quantity">
+          </div>
+          <div class="col col-md-2">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </div>
         </form>
       </div>
       <div class="card-body overflow-auto">
