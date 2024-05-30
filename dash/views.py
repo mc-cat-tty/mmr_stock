@@ -28,17 +28,23 @@ class DashDetailView(TemplateView):
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
     todo = 'todo' in self.request.GET
+    
+    all_users = True
     username = "All Users"
-
+    requests = Request.objects.all()
+    uses = Use.objects.all()
+    
     if id > 0:
-      request_profile = Profile.objects.get(user=self.request.user)
-      username = request_profile.user.username
-      uses = Use.objects.filter(profile=request_profile)
-      requests = Request.objects.filter(profile=request_profile)
-  
+      all_users = False
+      profile = Profile.objects.get(user__pk=id)
+      username = profile.user.username
+      uses = uses.filter(profile=profile)
+      requests = requests.filter(profile=profile)
+
     return {
       'uses': uses,
       'requests': requests.filter(approved=None) if todo else requests,
       'pagename': f'Dashboard {username}',
-      'todo': todo
+      'todo': todo,
+      'all_users': all_users
     }

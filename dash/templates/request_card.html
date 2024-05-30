@@ -2,7 +2,9 @@
 
 <div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle {% if request.approved == True %} bg-success-subtle {% elif request.approved == False %} bg-danger-subtle {% endif %}">
   <div class="row ms-1 text-muted font-monospace">
-    {{ request.date|date:"SHORT_DATE_FORMAT" }} {{ request.date|time:"G:i" }}
+    {% if all_users %} {{request.profile.user.username}} {% endif %}
+    {{ request.date|date:"SHORT_DATE_FORMAT" }}
+    {{ request.date|time:"G:i" }}
     <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
       <br> {{ request.quantity }} PCS
     </p>

@@ -42,13 +42,20 @@ function toViewMode() {
   state = State.VIEW;
 }
 
-function addBanner(message, fail = true) {
-  if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml)
-  modal.find("#failedOperation").html(message)
-  if (fail)
-    modal.find("#banner").attr('class', 'alert alert-danger d-flex align-items-center mt-4')
-  else
-    modal.find("#banner").attr('class', 'alert alert-success d-flex align-items-center mt-4')
+function addBanner(message, status = 'fail') {
+  if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml);
+  modal.find("#failedOperation").html(message);
+  switch (status) {
+    case 'fail':
+      modal.find("#banner").attr('class', 'alert alert-danger d-flex align-items-center mt-4')
+      break;
+    case 'success':
+      modal.find("#banner").attr('class', 'alert alert-success d-flex align-items-center mt-4')
+      break;
+    case 'warning':
+      modal.find("#banner").attr('class', 'alert alert-warning d-flex align-items-center mt-4')
+      break;
+  }
 }
 
 function removeBanner() {
@@ -186,7 +193,12 @@ function onClickGet(caller) {
     headers: headers,
     data: { quantity: $('#getComponentsValue').val() },
     success: (response) => {
-      addBanner(`You just ${response.action == 'get' ? "got" : "requested"} ${response.quantity} components. Congratulations!`, false);
+      if (response.action === 'get') {
+        addBanner(`You just got ${response.quantity} components. Congratulations!`, 'success');
+      }
+      else {
+        addBanner(`You just requested ${response.quantity} components. Wait for approval!`, 'warning');
+      }
       $('#quantityValue').val($('#quantityValue').val() - $('#getComponentsValue').val());
     },
     error: () => addBanner("Failed to get requested quantity")
