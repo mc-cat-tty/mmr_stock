@@ -23,12 +23,13 @@
             <button class="btn btn-outline-primary" type="submit">Search</button>
           </div>
         </form>
+        <div class="row ps-3 pt-1"> {{object_list.count}} results found </div>
       </div>
       <div class="card-body overflow-auto">
         <div class="container">
           <div class="row row-cols-auto g-3">
             {% for c in object_list %}
-              <div class="col d-flex">
+              <div class="col d-flex component-{{c.id}}">
               {% include "component_card.html" with preferred=c|is_in:favorite_components component=c %} 
               </div>
             {% endfor %}
