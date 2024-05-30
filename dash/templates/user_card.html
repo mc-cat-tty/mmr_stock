@@ -6,20 +6,20 @@
   <div class="card-image">
     <img
       class="card-img-left align-middle p-1"
-      src="{% static user.picture %}"
-      title="{{ name }}"
-      width="128px"
-      height="128px"
+      src="{% static profile.propic %}"
+      title="{{ profile.user.username }}"
+      width="64px"
+      height="64px"
     >
     <div class="image-overlay"></div>
   </div>
-  <div class="card-body p-1 d-flex align-items-center">
+  <div class="card-body p-1 ms-3 d-flex align-items-center">
     <p class="card-text p-0 m-0">
-      <div class="fw-bold"> {{ user.name }} </div>
+      <div class="fw-bold"> {{ profile.user.username }} </div>
+      <div class="fw-bold"> {{ profile.user.first_name }} </div>
+      <div class="fw-bold"> {{ profile.user.last_name }} </div>
     </p>
   </div>
 </div>
 
-<style>
-  {% include 'card_overlay.scss' %}
-</style>
+
