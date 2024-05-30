@@ -80,7 +80,7 @@ function dynPopulate (json_response) {
   );
 
   Object.entries(json_response)
-    .filter(([, value]) => !value)
+    .filter(([, value]) => typeof(value) != 'number' && !value)
     .forEach(
       ([field]) => modal.find(`#${field}Value`).val('-')
     )
@@ -88,6 +88,8 @@ function dynPopulate (json_response) {
   modal.find('#title').html(json_response.code);
   modal.find('#picture').attr('src', json_response.picture);
   modal.find('#lock').css('visibility', json_response.protection ? 'visible' : 'hidden');
+  if (json_response.protection) modal.find('#getBtn').html("Request").attr('class', 'btn btn-warning col-md-2')
+  else modal.find('#getBtn').html("Get").attr('class', 'btn btn-primary col-md-1')
   
   modal.find("#banner").remove();
   fieldsContainer.show();
