@@ -1,0 +1,25 @@
+{% load static %}
+
+<div
+  class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
+  >
+  <div class="card-image">
+    <img
+      class="card-img-left align-middle p-1"
+      src="{% static user.picture %}"
+      title="{{ name }}"
+      width="128px"
+      height="128px"
+    >
+    <div class="image-overlay"></div>
+  </div>
+  <div class="card-body p-1 d-flex align-items-center">
+    <p class="card-text p-0 m-0">
+      <div class="fw-bold"> {{ user.name }} </div>
+    </p>
+  </div>
+</div>
+
+<style>
+  {% include 'card_overlay.scss' %}
+</style>

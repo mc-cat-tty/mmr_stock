@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static core_extra %}
+
+{% block title %} MMR Stock | Dashboard {% endblock %}
+
+{% block content %}
+
+<div class="row row-cols-md-2 m-3 d-flex justify-content-center align-items-center full-height">
+  <!-- Left column -->
+  <div class="w-75" style="min-width: 512px">
+    <div class="card p-4 card-height">
+      <div class="card-title">
+        <!-- Searchbar -->
+        <form class="d-flex mb-1 sticky-top row g-2 justify-content-center" role="search" method="get">
+          <div class="col col-md-5">
+            <input name="query" class="form-control" type="search" placeholder="Search a user" value="{{query}}">
+          </div>
+          <div class="col col-md-2">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="card-body overflow-auto">
+        <div class="container">
+          {% for u in object_list %}
+            <div class="col d-flex">
+            {{ u.username }}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+<style>
+.full-height {
+  height: calc(100vh - 120px);
+}
+
+.card-height {
+  height: calc(75vh - 120px);
+}
+</style>
+
+{% endblock %}

@@ -1,7 +1,3 @@
-from argparse import Action
-from zoneinfo import available_timezones
-from django.shortcuts import render
-from django.shortcuts import render
 from django.db.models import CharField, TextField, IntegerField
 from django.views.generic.list import ListView
 from django.utils import timezone
