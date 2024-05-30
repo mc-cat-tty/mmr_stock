@@ -51,6 +51,10 @@ function addBanner(message) {
   modal.find("#failedOperation").html(message)
 }
 
+function removeBanner() {
+  modal.find("#banner").remove()
+}
+
 function onClickComponentCard (caller, id) {
   modal.modal('show');
 
@@ -75,9 +79,9 @@ function dynPopulate (json_response) {
   );
 
   Object.entries(json_response)
-    .filter(([field, value]) => !value)
+    .filter(([, value]) => !value)
     .forEach(
-      ([field, value]) => modal.find(`#${field}Value`).val('-')
+      ([field]) => modal.find(`#${field}Value`).val('-')
     )
   
   modal.find('#title').html(json_response.code);
@@ -97,7 +101,7 @@ function getModalData() {
   return Object.fromEntries(
     fields
       .map(field => [field, $(`#${field}Value`).val()])
-      .filter(([field, val]) => !!val)
+      .filter(([, val]) => !!val && val!='-')
   );
 }
 
@@ -109,6 +113,7 @@ function onClickSave (caller) {
         type: 'PUT',
         headers: headers,
         data: {pk: currentId, ...getModalData()},
+        success: () => removeBanner(),
         error: (response) => addBanner(response.responseText)
       });
       toViewMode();
