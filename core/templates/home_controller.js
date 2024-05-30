@@ -127,14 +127,22 @@ function onClickCancel (caller) {
       toViewMode();
       break;
     case State.VIEW:
-      toViewMode();
       modal.modal('hide');
       break;
   }
 }
 
 function onClickDel (caller) {
-
+  $.ajax({
+    url: `/components/${currentId}/`,
+    type: 'DELETE',
+    headers: headers,
+    success: () => {
+      modal.modal('hide');
+      $(`.component-${currentId}`).remove();
+    },
+    error: (response) => addBanner("Failed delete")
+  });
 }
 
 function onClickStar(caller, event, id) {
