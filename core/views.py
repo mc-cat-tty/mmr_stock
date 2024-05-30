@@ -20,20 +20,27 @@ class HomeView(ListView):
     queryset = super().get_queryset()
 
     query = self.request.GET.get('query', '')
+    queryset = queryset.filter(code__icontains=query) | queryset.filter(name__icontains=query)
+    min_quantity = self.request.GET.get('min', '')
+    max_quantity = self.request.GET.get('max', '')
+    
     try:
-      min_quantity = int(self.request.GET.get('min', 0))
+      queryset = queryset.filter(quantity__gte=int(min_quantity))
     except:
-      min_quantity = 0
+      pass
+    
+    try:
+      queryset = queryset.filter(quantity__lte=int(max_quantity))
+    except:
+      pass
 
     self.form_data = {
       'min_quantity': min_quantity,
+      'max_quantity': max_quantity,
       'query': query
     }
 
-    return (
-      queryset.filter(code__icontains=query)
-      | queryset.filter(name__icontains=query)
-    ).filter(quantity__gte=min_quantity)
+    return queryset
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)

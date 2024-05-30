@@ -6,50 +6,48 @@
 {% block content %}
 
 <div class="row row-cols-md-2 m-3 d-flex justify-content-center align-items-center full-height">
-  <div style="min-width: 200px; max-width: 700px">
-    <div class="card p-4 card-height">
-      <div class="card-title">
-        <h4 class="row d-flex justify-content-center pb-2">Select a user</h4>
-        <!-- Searchbar -->
-        <form class="d-flex mb-1 sticky-top row g-2 justify-content-center" role="search" method="get">
-          <div class="col col-md-5">
-            <input name="query" class="form-control" type="search" placeholder="Search a user" value="{{query}}">
-          </div>
-          <div class="col col-md-2">
-            <button class="btn btn-primary" type="submit">Search</button>
-          </div>
-        </form>
-        <h6 class="row ps-3 pt-1"> {{ object_list.count }} users </h6>
-      </div>
-      <div class="card-body overflow-auto">
-          <!-- All Users Card -->
-          <a href="user/0" style="text-decoration:none">
-            <div
-            class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
-            >
-              <div class="card-image">
-                <img
-                  class="card-img-left align-middle p-1"
-                  src="{% static 'all_users.png' %}"
-                  title="All users"
-                  width="64px"
-                  height="64px"
-                >
-                <div class="image-overlay"></div>
-              </div>
-              <div class="card-body p-1 ms-3 d-flex align-items-center">
-                <p class="card-text p-0 m-0">
-                  <div class="fw-bold"> All Users </div>
-                </p>
-              </div>
-            </div>
-          </a>
-
-          {% for profile in object_list %}
-            {% include "user_card.html" %}
-          {% endfor %}
+  <div class="card p-4 card-height" style="min-width: 200px; max-width: 700px">
+    <div class="card-title">
+      <h4 class="row d-flex justify-content-center pb-2">Select a user</h4>
+      <!-- Searchbar -->
+      <form class="d-flex mb-1 sticky-top row g-2 justify-content-center" role="search" method="get">
+        <div class="col col-md-5">
+          <input name="query" class="form-control" type="search" placeholder="Search a user" value="{{query}}">
         </div>
+        <div class="col col-md-2">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+      </form>
+      <h6 class="row ps-3 pt-1"> {{ object_list.count }} users </h6>
     </div>
+    <div class="card-body overflow-auto">
+        <!-- All Users Card -->
+        <a href="user/0" style="text-decoration:none">
+          <div
+          class="shadow-sm card flex-row mb-3 text-bg-light align-middle"
+          >
+            <div class="card-image">
+              <img
+                class="card-img-left align-middle p-1"
+                src="{% static 'all_users.png' %}"
+                title="All users"
+                width="64px"
+                height="64px"
+              >
+              <div class="image-overlay"></div>
+            </div>
+            <div class="card-body p-1 ms-3 d-flex align-items-center">
+              <p class="card-text p-0 m-0">
+                <div class="fw-bold"> All Users </div>
+              </p>
+            </div>
+          </div>
+        </a>
+
+        {% for profile in object_list %}
+          {% include "user_card.html" %}
+        {% endfor %}
+      </div>
   </div>
 </div>
 
