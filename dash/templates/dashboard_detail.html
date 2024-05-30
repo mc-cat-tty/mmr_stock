@@ -12,7 +12,6 @@
         <h4 class="row d-flex justify-content-center pb-2">Components' Uses</h4>
       </div>
       <div class="card-body overflow-auto">
-        <form class="container">
           {% for use in uses %}
             {% include "use_card.html" %}
           {% endfor %}
@@ -26,7 +25,6 @@
         <h4 class="row d-flex justify-content-center pb-2">Incoming requests</h4>
       </div>
       <div class="card-body overflow-auto">
-        <form class="container">
           {% for request in requests %}
             {% include "request_card.html" %}
           {% endfor %}
