@@ -17,7 +17,7 @@
             <input name="query" class="form-control" type="search" placeholder="Search a component" value="{{query}}">
           </div>
           <div class="col col-md-3">
-            <input name="min" class="form-control" type="number" placeholder="Min stock quantity" {% if value > 0 %} value="{{min_quantity}}" {% endif %}>
+            <input name="min" class="form-control" type="number" placeholder="Min stock quantity" {% if min_quantity > 0 %} value="{{min_quantity}}" {% endif %}>
           </div>
           <div class="col col-md-2">
             <button class="btn btn-outline-primary" type="submit">Search</button>
