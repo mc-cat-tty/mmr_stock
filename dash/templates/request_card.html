@@ -25,7 +25,7 @@
     </p>
   </div>
   <div class="ms-auto">
-    <button type="button" class="btn btn-danger btn-sm" onclick="onClickReject(this, {{request.id}})">Reject</button>
-    <button type="button" class="btn btn-success btn-sm pb-1" onclick="onClickApprove(this, {{request.id}})">Approve</button>
+    <button type="button" class="btn btn-danger btn-sm" onclick="onClickRequest(this, {{request.id}}, false)">Reject</button>
+    <button type="button" class="btn btn-success btn-sm pb-1" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>
   </div>
 </div>
