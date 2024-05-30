@@ -15,6 +15,7 @@ from .models import *
 class HomeView(ListView):
   model = Component
   template_name="home.html"
+  paginate_by = 24
   form_data = {}
   
   def get_queryset(self):
