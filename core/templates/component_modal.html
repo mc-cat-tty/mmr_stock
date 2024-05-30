@@ -35,6 +35,13 @@
           {% endfor %}
 
         </div>
+
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-4">
+            <input type="number" class="form-control" id="getComponentsValue" placeholder="Get components">
+          </div>
+          <button class="btn btn-primary col-md-1" onclick="onClickGet(this)">Get</button>
+        </div>
       </div>
       <div class="modal-footer">
         <button id="delBtn" type="button" class="btn btn-outline-danger" onclick="onClickDel(this)">
@@ -44,7 +51,7 @@
           <i class="bi bi-pencil"></i>
         </button>
         <button id='cancelBtn' type="button" class="btn btn-secondary" onclick="onClickCancel(this)">Close</button>
-        <button id='saveBtn' type="button" class="btn btn-primary" onclick="onClickSave(this)">Save changes</button>
+        <button style="display:none" id='saveBtn' type="button" class="btn btn-info" onclick="onClickSave(this)">Save changes</button>
       </div>
     </div>
   </div>

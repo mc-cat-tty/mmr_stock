@@ -25,9 +25,7 @@ function toEditMode () {
   );
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).hide());
-  modal.find('#saveBtn')
-    .attr('class', 'btn btn-info')
-    .html('Save changes')
+  modal.find('#saveBtn').show()
 }
 
 function toViewMode () {
@@ -39,16 +37,18 @@ function toViewMode () {
   );
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).show());
-  modal.find('#saveBtn')
-    .attr('class', 'btn btn-primary')
-    .html('Update quantity')
+  modal.find('#saveBtn').hide()
 
   state = State.VIEW;
 }
 
-function addBanner(message) {
+function addBanner(message, fail=true) {
   if (!modal.find("#failedOperation").length) modal.find("#body").append(alertHtml)
   modal.find("#failedOperation").html(message)
+  if (fail)
+    modal.find("#banner").attr('class', 'alert alert-danger d-flex align-items-center mt-4')
+  else
+    modal.find("#banner").attr('class', 'alert alert-success d-flex align-items-center mt-4')
 }
 
 function removeBanner() {
@@ -68,6 +68,7 @@ function onClickComponentCard (caller, id) {
     }
   });
 
+  $('#getComponentsValue').val('');
   currentId = id;
 }
 
@@ -172,4 +173,20 @@ function onClickStar(caller, event, id) {
     }
   });
 
+}
+
+function onClickGet(caller) {
+  if (!$('#getComponentsValue').val()) return;
+
+  $.ajax({
+    url: `components/${currentId}/`,
+    type: "PATCH",
+    headers: headers,
+    data: {quantity: $('#getComponentsValue').val()},
+    success: (response) => {
+      addBanner(`You just reserved ${response.quantity} components. Congratulations!`, false);
+      $('#quantityValue').val($('#quantityValue').val() - $('#getComponentsValue').val());
+    },
+    error: () => addBanner("Failed to get requested quantity")
+  })
 }

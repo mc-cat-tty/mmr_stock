@@ -1,11 +1,14 @@
+from zoneinfo import available_timezones
 from django.shortcuts import render
-from rest_framework import serializers, viewsets
 from django.shortcuts import render
+from django.db.models import CharField, TextField, IntegerField
+from django.views.generic.list import ListView
+from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.request import Request
-from django.db.models import CharField, TextField, IntegerField
+from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.viewsets import GenericViewSet
 from .models import Component, Profile
-from django.views.generic.list import ListView
 
 class HomeView(ListView):
   model = Component
@@ -74,6 +77,22 @@ class ComponentSerializer(serializers.ModelSerializer):
       'depth', 'protection'
     )
 
-class ComponentAPI(viewsets.ModelViewSet):
+class ComponentAPI(
+  GenericViewSet,
+  RetrieveModelMixin,
+  UpdateModelMixin,
+  DestroyModelMixin):
   queryset = Component.objects.all()
   serializer_class = ComponentSerializer
+
+  def partial_update(self, request: Request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    available_quantity = Component.objects.get(pk=pk).quantity
+    requested_quantity = int(request.data.get('quantity'))
+    available_quantity -= requested_quantity
+    
+    if (available_quantity < 0): return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+    
+    Component.objects.filter(pk=pk).update(quantity = available_quantity)
+    state = {'quantity': requested_quantity}
+    return Response(status=status.HTTP_200_OK, data=state)
