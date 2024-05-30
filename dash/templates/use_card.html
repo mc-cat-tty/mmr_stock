@@ -3,6 +3,9 @@
 <div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle">
   <div class="row ms-1 text-muted font-monospace">
     {{ use.date|date:"SHORT_DATE_FORMAT" }} {{ use.date|time:"G:i" }}
+    <p class="card-text ms-auto fw-bold col-sm-2 ps-2 pe-2 m-0 justify-content-center d-flex">
+      <br> {{ use.quantity }} PCS
+    </p>
   </div>
 
   <div class="row">
@@ -20,8 +23,6 @@
       <br>
       {{ use.component.code }}
     </p>
-    <p class="card-text fw-bold col-sm-2 ps-2 pe-2 m-0 justify-content-center d-flex">
-      <br> {{ use.quantity }} PCS
-    </p>
+
   </div>
 </div>

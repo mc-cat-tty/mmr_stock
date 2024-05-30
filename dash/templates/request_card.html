@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle">
+  <div class="row ms-1 text-muted font-monospace">
+    {{ request.date|date:"SHORT_DATE_FORMAT" }} {{ request.date|time:"G:i" }}
+    <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
+      <br> {{ request.quantity }} PCS
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="card-image col-sm-2">
+      <img
+        class="card-img-left align-middle"
+        src="{% static request.component.picture %}"
+        title="{{ request.component.name }}"
+        width="64px"
+        height="64px"
+      >
+    </div>
+    <p class="card-text col-sm-10 ps-2 pe-2 m-0">
+      {{ request.component.name|slice:":150" }} {% if request.component.name|length > 150 %} ... {% endif %}
+      <br>
+      {{ request.component.code }}
+    </p>
+  </div>
+  <div class="ms-auto">
+    <button type="button" class="btn btn-danger btn-sm" onclick="onClickReject(this, {{request.id}})">Reject</button>
+    <button type="button" class="btn btn-success btn-sm pb-1" onclick="onClickApprove(this, {{request.id}})">Approve</button>
+  </div>
+</div>
