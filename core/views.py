@@ -1,3 +1,4 @@
+from argparse import Action
 from zoneinfo import available_timezones
 from django.shortcuts import render
 from django.shortcuts import render
@@ -98,11 +99,23 @@ class ComponentAPI(
     if (available_quantity < 0): return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
     
     Component.objects.filter(pk=pk).update(quantity = available_quantity)
-    Use.objects.create(
-      profile=Profile.objects.get(user=self.request.user),
-      component=component,
-      date=timezone.now()
-    )
+    if not component.protection:
+      Use.objects.create(
+        profile=Profile.objects.get(user=self.request.user),
+        component=component,
+        date=timezone.now()
+      )
+      action = 'get'
+    else:
+      Request.objects.create(
+        profile=Profile.objects.get(user=self.request.user),
+        component=component,
+        date=timezone.now()
+      )
+      action = 'request'
 
-    state = {'quantity': requested_quantity}
+    state = {
+      'quantity': requested_quantity,
+      'action': action
+    }
     return Response(status=status.HTTP_200_OK, data=state)

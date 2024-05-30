@@ -186,7 +186,7 @@ function onClickGet(caller) {
     headers: headers,
     data: {quantity: $('#getComponentsValue').val()},
     success: (response) => {
-      addBanner(`You just reserved ${response.quantity} components. Congratulations!`, false);
+      addBanner(`You just ${response.action == 'get' ? "got" : "requested"} ${response.quantity} components. Congratulations!`, false);
       $('#quantityValue').val($('#quantityValue').val() - $('#getComponentsValue').val());
     },
     error: () => addBanner("Failed to get requested quantity")
