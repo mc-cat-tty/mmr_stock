@@ -56,18 +56,36 @@ class DashUpdatesAPI(AsyncWebsocketConsumer):
   async def connect(self):
     self.user_id = self.scope["url_route"]["kwargs"]["user_id"]
     self.group_name = f"user_{self.user_id}"
+   
+    if self.user_id == 0:
+      await self.channel_layer.group_add(
+        "user_all",
+        self.channel_name
+      )
+    else:
+      await self.channel_layer.group_add(
+        self.group_name,
+        self.channel_name
+      )
 
-    await self.channel_layer.group_add(
+    await self.accept()
+  
+  async def disconnect(self, close_code):
+    await self.channel_layer.group_discard(
       self.group_name,
       self.channel_name
     )
-    await self.accept()
+
+    await self.channel_layer.group_discard(
+      "user_all",
+      self.channel_name
+    )
   
   @database_sync_to_async
   def get_data(self, request_pk):
     return RequestSerializer(Request.objects.get(pk=request_pk)).data
   
-  async def request_update(self, event):
+  async def request_add(self, event):
     request_pk = event.get("request_pk")
     request = await self.get_data(request_pk)
     

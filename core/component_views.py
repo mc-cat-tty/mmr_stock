@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.viewsets import GenericViewSet
 from .models import *
-from .request_views import NotifyUpdateMixin 
+from .request_views import NotifyRequestsMixin 
 
 
 class ComponentSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class ComponentAPI(
   RetrieveModelMixin,
   UpdateModelMixin,
   DestroyModelMixin,
-  NotifyUpdateMixin):
+  NotifyRequestsMixin):
   queryset = Component.objects.all()
   serializer_class = ComponentSerializer
 
@@ -35,7 +35,7 @@ class ComponentAPI(
     available_quantity -= requested_quantity
     
     if (available_quantity < 0): return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-    print(timezone.now())
+
     Component.objects.filter(pk=pk).update(quantity = available_quantity)
     if not component.protection:
       Use.objects.create(

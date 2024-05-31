@@ -35,19 +35,28 @@ class UpdateRequestSerializer(serializers.ModelSerializer):
     model = Request
     fields = ('id', 'approved')
 
-class NotifyUpdateMixin:
+class NotifyRequestsMixin:
   def notify(self, user_pk: int, request_pk: int) -> None:
     group_name = f"user_{user_pk}"
     channel_layer = get_channel_layer()
+    
     async_to_sync(channel_layer.group_send)(
       group_name,
       {
-        "type": "request_update",
+        "type": "request_add",
         "request_pk": request_pk,
       }
     )
 
-class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyUpdateMixin):
+    async_to_sync(channel_layer.group_send)(
+      "user_all",
+      {
+        "type": "request_add",
+        "request_pk": request_pk,
+      }
+    )
+
+class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
   queryset = Request.objects.all()
   serializer_class = UpdateRequestSerializer
 
