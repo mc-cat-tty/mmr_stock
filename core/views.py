@@ -11,8 +11,8 @@ def login_view(request: HttpRequest) -> HttpResponse:
   if request.method == "POST":
     form = LoginForm(request.POST)
     if not form.is_valid(): render(request, "login.html", {'form': form})
-    username = form.cleaned_data["username"]
-    password = form.cleaned_data["password"]
+    username = form.cleaned_data.get("username")
+    password = form.cleaned_data.get("password")
     user = authenticate(request, username=username, password=password)
     if not user: return render(request, "login.html", {'form': form})
     login(request, user)
