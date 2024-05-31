@@ -5,6 +5,8 @@ from rest_framework.request import Request
 from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.viewsets import GenericViewSet
 from .models import *
+from .request_views import NotifyUpdateMixin 
+
 
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
@@ -20,7 +22,8 @@ class ComponentAPI(
   GenericViewSet,
   RetrieveModelMixin,
   UpdateModelMixin,
-  DestroyModelMixin):
+  DestroyModelMixin,
+  NotifyUpdateMixin):
   queryset = Component.objects.all()
   serializer_class = ComponentSerializer
 
@@ -43,12 +46,13 @@ class ComponentAPI(
       )
       action = 'get'
     else:
-      Request.objects.create(
+      r = Request.objects.create(
         profile=Profile.objects.get(user=self.request.user),
         component=component,
         date=timezone.now(),
         quantity=requested_quantity
       )
+      self.notify(self.request.user.pk, r.pk)
       action = 'request'
 
     state = {

@@ -23,7 +23,19 @@ class UpdateRequestSerializer(serializers.ModelSerializer):
     model = Request
     fields = ('id', 'approved')
 
-class RequestAPI(GenericViewSet, UpdateModelMixin):
+class NotifyUpdateMixin:
+  def notify(self, user_pk: int, request_pk: int) -> None:
+    group_name = f"user_{user_pk}"
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+      group_name,
+      {
+        "type": "request_update",
+        "request_pk": request_pk,
+      }
+    )
+
+class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyUpdateMixin):
   queryset = Request.objects.all()
   serializer_class = UpdateRequestSerializer
 
@@ -32,17 +44,6 @@ class RequestAPI(GenericViewSet, UpdateModelMixin):
     request_obj = self.queryset.get(pk=pk)
     if request_obj.approved != None: return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
-    user_pk = request_obj.profile.pk
-    group_name = f"user_{user_pk}"
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(
-      group_name,
-      {
-        "type": "request_update",
-        "request_pk": pk,
-      }
-    )
-
     if request.data.get('approved') == 'true':
       Use.objects.create(
         profile = request_obj.profile,
@@ -50,5 +51,6 @@ class RequestAPI(GenericViewSet, UpdateModelMixin):
         date = timezone.now(),
         quantity = request_obj.quantity
       )
-
+    
+    self.notify(request_obj.profile.pk, pk)
     return super().update(request, *args, **kwargs)
