@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpRequest
+from channels.generic.websocket import AsyncWebsocketConsumer
 from core.models import *
 
 class DashView(ListView):
@@ -48,3 +49,7 @@ class DashDetailView(TemplateView):
       'todo': todo,
       'all_users': all_users
     }
+
+class DashUpdatesAPI(AsyncWebsocketConsumer):
+  async def connect(self):
+    await self.accept()
