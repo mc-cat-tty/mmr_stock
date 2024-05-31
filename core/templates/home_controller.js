@@ -71,7 +71,10 @@ function onClickSave(caller) {
         type: 'POST',
         headers: headers,
         data: { ...getModalData() },
-        success: (component) => addBanner(`Component crated with pk ${component.pk}. Congratulations!`, 'success'),
+        success: (component) => {
+          addBanner(`Component crated with pk ${component.id}. Congratulations!`, 'success');
+          currentId = component.id;
+        },
         error: (response) => addBanner(response.responseText)
       });
       break;
@@ -183,6 +186,11 @@ function toViewMode() {
   );
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).show());
+  
+  modal.find('#getBtn').show();
+  modal.find("#getComponentsValue").show();
+  modal.find('#saveBtn').html("Save changes").attr("class", "btn btn-info");
+  modal.find('#cancelBtn').show();
   modal.find('#saveBtn').hide()
 
   state = State.VIEW;
