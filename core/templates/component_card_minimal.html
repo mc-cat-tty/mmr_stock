@@ -6,19 +6,20 @@
   >
   {% include 'star.html' with position='side' %}
 
-  <div class="card-image">
+  <div class="card-image" >
     <img
-      class="card-img-left align-middle p-1"
+      class="card-img-left align-middle p-1 object-fit-contain"
       src="{% static component.picture %}"
       title="{{ component.name }}"
       width="128px"
       height="128px"
+      id="cardPic"
     >
     <div class="image-overlay"></div>
   </div>
   <div class="card-body p-1 d-flex align-items-center">
     <p class="card-text p-0 m-0">
-      <div class="fw-bold"> {{ component.name|slice:":60" }} {% if component.name|length > 60 %} ... {% endif %} </div>
+      <div class="fw-bold" id="cardName"> {{ component.name|slice:":60" }} {% if component.name|length > 60 %} ... {% endif %} </div>
     </p>
   </div>
 </div>

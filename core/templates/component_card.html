@@ -1,7 +1,7 @@
 {% load static %}
 
 <div
-  class="shadow-sm card text-bg-light component-card"
+  class="shadow-sm card text-bg-light component-card component-{{component.id}}"
   style="width:200px"
   onclick="onClickComponentCard(this, {{component.id}})"
   >
@@ -14,13 +14,14 @@
     <img
       class="card-img-top pe-5 ps-5 pd-1 pt-2"
       src="{% static component.picture %}"
-      ttitle="{{ component.name }}"
+      title="{{ component.name }}"
+      id="cardPic"
     >
     <div class="image-overlay"></div>
   </div>
   <div class="card-body pt-1">
     <p class="card-text p-0">
-      <div class="fw-bold flex-fill">
+      <div class="fw-bold flex-fill" id="cardName">
         {{ component.name|slice:":60" }}
         {% if component.name|length > 60 %} ...
         {% endif %}
@@ -28,8 +29,12 @@
 
       <hr>
 
-      Code: {{ component.code }} <br>
-      Quantity: {{ component.quantity }}
+      <div class="m-0 p-0" id="cardCode">
+        Code: {{ component.code }}
+      </div>
+      <div class="m-0 p-0" id="cardQuantity">
+        Quantity: {{ component.quantity }}
+      </div>
     </p>
 
   </div>

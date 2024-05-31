@@ -19,6 +19,7 @@ const numericFields = [ {% for field in modal_numeric_fields %} "{{ field.name }
 const booleanFields = [ {% for field in modal_boolean_fields %} "{{ field.name }}",  {% endfor %} ];
 const fields = textualFields.concat(numericFields);
 const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
+var modalState;
 
 function onClickComponentCard(caller, id) {
   modal.modal('show');
@@ -46,6 +47,7 @@ function onClickAdd(caller) {
 }
 
 function onClickEdit(caller) {
+  modalState = getModalData();
   toEditMode();
 }
 
@@ -61,11 +63,15 @@ function onClickSave(caller) {
         processData: false,
         contentType: false,
         data: data,
-        success: () => removeBanner(),
+        success: (component) => {
+          dynPopulate(component);
+          updateCard(currentId, component);
+          removeBanner();
+          addBanner(`Component updated. Congratulations!`, 'success');
+          toViewMode();
+        },
         error: (response) => addBanner(response.responseText)
       });
-      toViewMode();
-
       break;
 
     case State.VIEW:
@@ -81,9 +87,9 @@ function onClickSave(caller) {
         contentType: false,
         data: getModalData(),
         success: (component) => {
-          addBanner(`Component crated with pk ${component.id}. Congratulations!`, 'success');
-          currentId = component.id;
-          toViewMode();
+          // addBanner(`Component crated with pk ${component.id}. Congratulations!`, 'success');
+          // currentId = component.id;
+          location.reload();
         },
         error: (response) => addBanner(response.responseText)
       });
@@ -94,6 +100,7 @@ function onClickSave(caller) {
 function onClickCancel(caller) {
   switch (state) {
     case State.EDIT:
+      dynPopulate(Object.fromEntries(modalState.entries()));
       toViewMode();
       break;
     case State.VIEW:
@@ -177,8 +184,11 @@ function toEditMode() {
   );
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).hide());
-  modal.find('#saveBtn').show()
-  modal.find('#picture-upload').show()
+  modal.find('#saveBtn').show();
+  modal.find('#picture-upload').show();
+  modal.find('#getBtn').hide();
+  modal.find("#getComponentsValue").hide();
+  modal.find("#cancelBtn").show().html("Cancel");
 }
 
 function toViewMode() {
@@ -200,7 +210,7 @@ function toViewMode() {
   modal.find('#getBtn').show();
   modal.find("#getComponentsValue").show();
   modal.find('#saveBtn').html("Save changes").attr("class", "btn btn-info");
-  modal.find('#cancelBtn').show();
+  modal.find('#cancelBtn').show().html("Close");
   modal.find('#saveBtn').hide();
   modal.find('#picture-upload').hide();
 
@@ -258,10 +268,7 @@ function clearModal() {
 
 function dynPopulate(json_response) {
   Object.entries(json_response).forEach(
-    ([field, value]) => {
-      console.log(field);
-      modal.find(`#${field}Value`).val(value);
-    }
+    ([field, value]) => modal.find(`#${field}Value`).val(value)
   );
 
   Object.entries(json_response).filter(
@@ -302,4 +309,12 @@ function getModalData() {
   if (image) formdata.append('picture', image);
   
   return formdata;
+}
+
+function updateCard(id, data) {
+  const card = $(`.component-${id}`);
+  card.find("#cardPic").attr("src", data.picture);
+  card.find("#cardName").html(data.name.slice(0, 60) + (data.name.length > 60 ? " ..." : ""));
+  card.find("#cardCode").html(`Code: ${data.code}`);
+  card.find("#cardQuantity").html(`Quantity: ${data.quantity}`);
 }
