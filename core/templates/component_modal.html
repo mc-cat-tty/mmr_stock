@@ -34,6 +34,15 @@
           </div>
           {% endfor %}
 
+          {% for field in modal_boolean_fields %}
+          <div class="row mb-1">
+            <label class="form-check-label col-sm-2" for="{{field.name}}Value">
+              {{ field.name|snake_to_capitalized }}
+            </label>
+              <input disabled class="form-check-input ms-1" type="checkbox" value="" id="{{field.name}}Value">
+          </div>
+          {% endfor %}
+
         </div>
 
         <div class="row d-flex justify-content-center">

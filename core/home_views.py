@@ -1,6 +1,6 @@
 from curses.panel import update_panels
 from statistics import quantiles
-from django.db.models import CharField, TextField, IntegerField
+from django.db.models import CharField, TextField, IntegerField, BooleanField
 from django.views.generic.list import ListView
 from .models import *
 
@@ -48,6 +48,10 @@ class HomeView(ListView):
       lambda field: isinstance(field, IntegerField) and field.name != 'id',
       Component._meta.fields
     )
+    COMPONENT_BOOLEAN_FIELDS = filter(
+      lambda field: isinstance(field, BooleanField),
+      Component._meta.fields
+    )
     
     favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
@@ -56,7 +60,8 @@ class HomeView(ListView):
       'recommended': Component.objects.all()[:20],
       'favorite_components': favorite_components,
       'modal_textual_fields': list(COMPONENT_TEXT_FIELDS),
-      'modal_numeric_fields': list(COMPONENT_NUMERIC_FIELDS)
+      'modal_numeric_fields': list(COMPONENT_NUMERIC_FIELDS),
+      'modal_boolean_fields': list(COMPONENT_BOOLEAN_FIELDS)
     }
 
     return context | extra_context | self.form_data

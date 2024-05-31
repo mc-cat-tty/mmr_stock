@@ -13,6 +13,7 @@ var state = State.VIEW;
 var currentId;
 const textualFields = [ {% for field in modal_textual_fields %} "{{ field.name }}",  {% endfor %} ];
 const numericFields = [ {% for field in modal_numeric_fields %} "{{ field.name }}",  {% endfor %} ];
+const booleanFields = [ {% for field in modal_boolean_fields %} "{{ field.name }}",  {% endfor %} ];
 const fields = textualFields.concat(numericFields);
 const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
 
@@ -141,6 +142,12 @@ function toEditMode() {
       .attr('readonly', false)
   );
 
+  booleanFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .attr('disabled', false)
+  );
+
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).hide());
   modal.find('#saveBtn').show()
 }
@@ -151,6 +158,12 @@ function toViewMode() {
       .find(`#${field}Value`)
       .attr('class', 'form-control-plaintext')
       .attr('readonly', true)
+  );
+
+  booleanFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .attr('disabled', true)
   );
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).show());
@@ -183,6 +196,12 @@ function dynPopulate(json_response) {
   Object.entries(json_response).forEach(
     ([field, value]) => modal.find(`#${field}Value`).val(value)
   );
+
+  Object.entries(json_response).filter(
+    ([field,]) => booleanFields.includes(field)
+  ).forEach(
+    ([field, value]) => modal.find(`#${field}Value`).attr('checked', value)
+  )
 
   Object.entries(json_response)
     .filter(([, value]) => typeof (value) != 'number' && !value)
