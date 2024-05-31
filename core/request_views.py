@@ -6,17 +6,29 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from django.template.defaultfilters import date, time
+
 
 from .models import *
 
 class RequestSerializer(serializers.ModelSerializer):
   component_name = serializers.CharField(source="component.name")
   component_code = serializers.CharField(source="component.code")
+  component_pic = serializers.ImageField(source="component.picture")
   profile_name = serializers.CharField(source="profile.user.username")
   
   class Meta:
     model = Request
-    fields = ('id', 'approved', 'quantity', 'date', 'profile_name', 'component_name', 'component_code')
+    fields = (
+      'id', 'approved', 'quantity',
+      'date', 'profile_name', 'component_name',
+      'component_code', 'component_pic'
+    )
+  
+  def to_representation(self, instance):
+    r = super().to_representation(instance)
+    r['date'] = date(instance.date, "SHORT_DATE_FORMAT") + " " + time(instance.date, "G:i")
+    return r
 
 class UpdateRequestSerializer(serializers.ModelSerializer):
   class Meta:
@@ -52,5 +64,4 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyUpdateMixin):
         quantity = request_obj.quantity
       )
     
-    self.notify(request_obj.profile.pk, pk)
     return super().update(request, *args, **kwargs)

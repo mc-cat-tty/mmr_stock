@@ -6,12 +6,12 @@
     {{ request.date|date:"SHORT_DATE_FORMAT" }}
     {{ request.date|time:"G:i" }}
     <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
-      <br> {{ request.quantity }} PCS
+      {{ request.quantity }} PCS
     </p>
   </div>
 
   <div class="row">
-    <div class="card-image col-sm-2">
+    <div class="card-image col-sm-2 mb-1">
       <img
         class="card-img-left align-middle"
         src="{% static request.component.picture %}"
@@ -20,7 +20,7 @@
         height="64px"
       >
     </div>
-    <p class="card-text col-sm-10 ps-2 pe-2 mb-1 m-0">
+    <p class="card-text col-sm-10 ps-2 pe-2 m-0">
       {{ request.component.name|slice:":150" }} {% if request.component.name|length > 150 %} ... {% endif %}
       <br>
       {{ request.component.code }}
@@ -29,7 +29,7 @@
   {% if request.approved == None %}
   <div class="ms-auto">
     <button type="button" class="btn btn-danger btn-sm" onclick="onClickRequest(this, {{request.id}}, false)">Reject</button>
-    <button type="button" class="btn btn-success btn-sm pb-1" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>
+    <button type="button" class="btn btn-success btn-sm" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>
   </div>
   {% endif %}
 </div>

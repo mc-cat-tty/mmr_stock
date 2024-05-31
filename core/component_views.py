@@ -35,7 +35,7 @@ class ComponentAPI(
     available_quantity -= requested_quantity
     
     if (available_quantity < 0): return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
-    
+    print(timezone.now())
     Component.objects.filter(pk=pk).update(quantity = available_quantity)
     if not component.protection:
       Use.objects.create(

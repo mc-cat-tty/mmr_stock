@@ -54,11 +54,11 @@ class DashDetailView(TemplateView):
 
 class DashUpdatesAPI(AsyncWebsocketConsumer):
   async def connect(self):
-    user_id = self.scope["url_route"]["kwargs"]["user_id"]
-    group_name = f"user_{user_id}"
+    self.user_id = self.scope["url_route"]["kwargs"]["user_id"]
+    self.group_name = f"user_{self.user_id}"
 
     await self.channel_layer.group_add(
-      group_name,
+      self.group_name,
       self.channel_name
     )
     await self.accept()
@@ -67,12 +67,11 @@ class DashUpdatesAPI(AsyncWebsocketConsumer):
   def get_data(self, request_pk):
     return RequestSerializer(Request.objects.get(pk=request_pk)).data
   
-  async def receive(self, text_data):
-    data = await self.get_data()
-    print(text_data)
-    await self.send(dumps(data))
-  
   async def request_update(self, event):
     request_pk = event.get("request_pk")
     request = await self.get_data(request_pk)
+    
+    # If fetching a specific user
+    if self.user_id > 0: request['profile_name'] = ''
+    
     await self.send(dumps(request))
