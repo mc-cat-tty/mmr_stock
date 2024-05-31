@@ -1,8 +1,11 @@
+{% load static %}
+
 const modal = $('#componentModal');
 const fieldsContainer = modal.find("#fieldsContainer");
 const State = Object.freeze({
   VIEW: 'view',
-  EDIT: 'edit'
+  EDIT: 'edit',
+  CREATE: 'create'
 });
 const alertHtml =
   '<div class="alert alert-danger d-flex align-items-center mt-4" role="alert" id="banner">'
@@ -35,7 +38,10 @@ function onClickComponentCard(caller, id) {
 }
 
 function onClickAdd(caller) {
+  modal.modal('show');
+  clearModal();
   toEditMode();
+  state = State.CREATE;
 }
 
 function onClickEdit(caller) {
@@ -53,11 +59,21 @@ function onClickSave(caller) {
         success: () => removeBanner(),
         error: (response) => addBanner(response.responseText)
       });
-      toViewMode();
       break;
 
     case State.VIEW:
       modal.modal('hide');
+      break;
+    
+    case State.CREATE:
+      $.ajax({
+        url: `/components/`,
+        type: 'POST',
+        headers: headers,
+        data: { ...getModalData() },
+        success: (component) => addBanner(`Component crated with pk ${component.pk}. Congratulations!`, 'success'),
+        error: (response) => addBanner(response.responseText)
+      });
       break;
   }
   toViewMode();
@@ -192,6 +208,35 @@ function removeBanner() {
   modal.find("#banner").remove()
 }
 
+function clearModal() {
+  booleanFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .attr('checked', false)
+  );
+
+  textualFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .val('')
+  );
+
+  numericFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .val('')
+  );
+
+  modal.find('#title').html('Create New Component');
+  modal.find('#lock').css('visibility', 'hidden');
+  modal.find('#picture').attr('src', "{% static 'unknown_component.png' %}");
+  modal.find('#getBtn').hide();
+  modal.find("#getComponentsValue").hide();
+  modal.find("#banner").remove();
+  modal.find('#saveBtn').html("Create").attr("class", "btn btn-primary");
+  modal.find('#cancelBtn').hide();
+}
+
 function dynPopulate(json_response) {
   Object.entries(json_response).forEach(
     ([field, value]) => modal.find(`#${field}Value`).val(value)
@@ -225,5 +270,9 @@ function getModalData() {
     fields
       .map(field => [field, $(`#${field}Value`).val()])
       .filter(([, val]) => !!val && val != '-')
+      .concat(
+        booleanFields.map(field => [field, $(`#${field}Value`).is(":checked")])
+      )
   );
+  
 }
