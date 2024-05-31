@@ -8,8 +8,7 @@ django = "*"
 pillow = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
-daphne = "*"
-channels = "*"
+channels = {extras = ["daphne"], version = "*"}
 
 [dev-packages]
 
