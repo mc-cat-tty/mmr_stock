@@ -8,15 +8,28 @@ class LoginForm(forms.Form):
   password = forms.CharField(widget=forms.PasswordInput, required=True)
 
 def login_view(request: HttpRequest) -> HttpResponse:
+  context = {"pagename": "Login"}
+
   if request.method == "POST":
     form = LoginForm(request.POST)
-    if not form.is_valid(): render(request, "login.html", {'form': form})
+    if not form.is_valid():
+      render(request, "login.html",
+        context
+        | {'form': form, "error": "Ore or more fields are invalid"}
+      )
+    
     username = form.cleaned_data.get("username")
     password = form.cleaned_data.get("password")
     user = authenticate(request, username=username, password=password)
-    if not user: return render(request, "login.html", {'form': form})
+    
+    if not user:
+      return render(request, "login.html",
+        context
+        | {'form': form, "error": "Wrong credentials"}
+      )
+    
     login(request, user)
     return redirect("core:home")
 
   form = LoginForm()  
-  return render(request, "login.html", {'form': form})
+  return render(request, "login.html", context | {'form': form})

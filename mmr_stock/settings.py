@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    "crispy_forms"
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,4 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:8080"]
+CRISPY_TEMPLATE_PACK = "bootstrap5"

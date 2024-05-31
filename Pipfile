@@ -10,6 +10,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 channels = {extras = ["daphne"], version = "*"}
 django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 
