@@ -55,8 +55,8 @@ class HomeView(ListView):
       'pagename': 'Home',
       'recommended': Component.objects.all()[:20],
       'favorite_components': favorite_components,
-      'modal_textual_fields': COMPONENT_TEXT_FIELDS,
-      'modal_numeric_fields': COMPONENT_NUMERIC_FIELDS
+      'modal_textual_fields': list(COMPONENT_TEXT_FIELDS),
+      'modal_numeric_fields': list(COMPONENT_NUMERIC_FIELDS)
     }
 
     return context | extra_context | self.form_data

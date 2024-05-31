@@ -2,7 +2,7 @@ from django.utils import timezone
 from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from .models import *
 from .request_views import NotifyRequestsMixin 
@@ -22,6 +22,7 @@ class ComponentAPI(
   GenericViewSet,
   RetrieveModelMixin,
   UpdateModelMixin,
+  CreateModelMixin,
   DestroyModelMixin,
   NotifyRequestsMixin):
   queryset = Component.objects.all()
