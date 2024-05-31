@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import serializers, status
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -41,4 +42,13 @@ class RequestAPI(GenericViewSet, UpdateModelMixin):
         "request_pk": pk,
       }
     )
+
+    if request.data.get('approved') == 'true':
+      Use.objects.create(
+        profile = request_obj.profile,
+        component = request_obj.component,
+        date = timezone.now(),
+        quantity = request_obj.quantity
+      )
+
     return super().update(request, *args, **kwargs)
