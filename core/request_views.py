@@ -36,14 +36,14 @@ class UpdateRequestSerializer(serializers.ModelSerializer):
     fields = ('id', 'approved')
 
 class NotifyRequestsMixin:
-  def notify(self, user_pk: int, request_pk: int) -> None:
+  def __notify(self, user_pk: int, request_pk: int, type: str) -> None:
     group_name = f"user_{user_pk}"
     channel_layer = get_channel_layer()
     
     async_to_sync(channel_layer.group_send)(
       group_name,
       {
-        "type": "request_add",
+        "type": type,
         "request_pk": request_pk,
       }
     )
@@ -51,10 +51,20 @@ class NotifyRequestsMixin:
     async_to_sync(channel_layer.group_send)(
       "user_all",
       {
-        "type": "request_add",
+        "type": type,
         "request_pk": request_pk,
       }
     )
+  
+  def notify_add(self, user_pk: int, request_pk: int) -> None:
+    return self.__notify(user_pk, request_pk, "request_add")
+  
+  def notify_approval(self, user_pk: int, request_pk: int) -> None:
+    return self.__notify(user_pk, request_pk, "request_approve")
+  
+  def notify_rejection(self, user_pk: int, request_pk: int) -> None:
+    return self.__notify(user_pk, request_pk, "request_reject")
+
 
 class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
   queryset = Request.objects.all()
@@ -72,5 +82,8 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
         date = timezone.now(),
         quantity = request_obj.quantity
       )
+      self.notify_approval(request_obj.profile.user.pk, request_obj.pk)
+    else:
+      self.notify_rejection(request_obj.profile.user.pk, request_obj.pk)
     
     return super().update(request, *args, **kwargs)

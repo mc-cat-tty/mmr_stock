@@ -52,7 +52,7 @@ class ComponentAPI(
         date=timezone.now(),
         quantity=requested_quantity
       )
-      self.notify(self.request.user.pk, r.pk)
+      self.notify_add(self.request.user.pk, r.pk)
       action = 'request'
 
     state = {

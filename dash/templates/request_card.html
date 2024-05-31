@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle {% if request.approved == True %} bg-success-subtle {% elif request.approved == False %} bg-danger-subtle {% endif %}">
+<div id ="request-card-{{request.id}}" class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle {% if request.approved == True %} bg-success-subtle {% elif request.approved == False %} bg-danger-subtle {% endif %}">
   <div class="row ms-1 text-muted font-monospace">
     {% if all_users %} {{request.profile.user.username}} {% endif %}
     {{ request.date|date:"SHORT_DATE_FORMAT" }}
@@ -27,7 +27,7 @@
     </p>
   </div>
   {% if request.approved == None %}
-  <div class="ms-auto">
+  <div class="ms-auto request-action-buttons">
     <button type="button" class="btn btn-danger btn-sm" onclick="onClickRequest(this, {{request.id}}, false)">Reject</button>
     <button type="button" class="btn btn-success btn-sm" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>
   </div>

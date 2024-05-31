@@ -91,5 +91,26 @@ class DashUpdatesAPI(AsyncWebsocketConsumer):
     
     # If fetching a specific user
     if self.user_id > 0: request['profile_name'] = ''
+
+    data = {
+      'action': 'add',
+      'content': request
+    }
     
-    await self.send(dumps(request))
+    await self.send(dumps(data))
+  
+  async def request_reject(self, event):
+    data = {
+      'action': 'reject',
+      'id': event.get('request_pk')
+    }
+
+    await self.send(dumps(data))
+  
+  async def request_approve(self, event):
+    data = {
+      'action': 'approve',
+      'id': event.get('request_pk')
+    }
+
+    await self.send(dumps(data))
