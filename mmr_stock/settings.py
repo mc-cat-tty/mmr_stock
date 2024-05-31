@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'dash.apps.DashConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders'
+    'corsheaders',
+    "crispy_forms"
 ]
 
 MIDDLEWARE = [
