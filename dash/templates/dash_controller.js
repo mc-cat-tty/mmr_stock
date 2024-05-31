@@ -1,8 +1,9 @@
 const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
 const requst_card_classes = "shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle"
-var updates_ws = new WebSocket("ws://localhost:8080/dash/updates");
+var updates_ws = new WebSocket(`ws://localhost:8080/dash/updates/1`);
 
-updates_ws.onmessage = () => console.log('update')
+updates_ws.onopen = () => console.log('open');
+updates_ws.onmessage = msg => console.log(msg);
 
 function onClickRequest(caller, id, approved=false) {
   $.ajax({

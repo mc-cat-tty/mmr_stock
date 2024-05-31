@@ -1,11 +1,13 @@
-from re import S
-from urllib import request
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpRequest
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.db import database_sync_to_async
+from json import dumps
+
 from core.models import *
+from core.request_views import RequestSerializer 
 
 class DashView(ListView):
   model = Profile
@@ -52,4 +54,25 @@ class DashDetailView(TemplateView):
 
 class DashUpdatesAPI(AsyncWebsocketConsumer):
   async def connect(self):
+    user_id = self.scope["url_route"]["kwargs"]["user_id"]
+    group_name = f"user_{user_id}"
+
+    await self.channel_layer.group_add(
+      group_name,
+      self.channel_name
+    )
     await self.accept()
+  
+  @database_sync_to_async
+  def get_data(self, request_pk):
+    return RequestSerializer(Request.objects.get(pk=request_pk)).data
+  
+  async def receive(self, text_data):
+    data = await self.get_data()
+    print(text_data)
+    await self.send(dumps(data))
+  
+  async def request_update(self, event):
+    request_pk = event.get("request_pk")
+    request = await self.get_data(request_pk)
+    await self.send(dumps(request))

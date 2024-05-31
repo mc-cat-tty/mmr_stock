@@ -11,5 +11,5 @@ urlpatterns = [
 ]
 
 ws_urlpatterns = [
-  path('dash/updates', DashUpdatesAPI.as_asgi())
+  path('dash/updates/<int:user_id>', DashUpdatesAPI.as_asgi())
 ]
