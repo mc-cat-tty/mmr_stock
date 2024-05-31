@@ -1,9 +1,9 @@
 const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
 const requst_card_classes = "shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle"
-var updates_ws = new WebSocket(`ws://localhost:8080/dash/updates/1`);
+const user_id = window.location.pathname.split("/").filter(x => !!x).pop()
+var updates_ws = new WebSocket(`ws://localhost:8080/dash/updates/${user_id}`);
 
-updates_ws.onopen = () => console.log('open');
-updates_ws.onmessage = msg => console.log(msg);
+updates_ws.onmessage = msg => addRequest(msg.data);
 
 function onClickRequest(caller, id, approved=false) {
   $.ajax({
@@ -22,4 +22,10 @@ function onClickRequest(caller, id, approved=false) {
       $(caller).parent().hide()
     }
   });
+}
+
+function addRequest(request) {
+  request = Object.fromEntries(request)
+  console.log(request)
+  console.log(request.component_name)
 }
