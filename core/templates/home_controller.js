@@ -41,6 +41,7 @@ function onClickAdd(caller) {
   modal.modal('show');
   clearModal();
   toEditMode();
+  modal.find('#picture-upload').show()
   state = State.CREATE;
 }
 
@@ -51,14 +52,20 @@ function onClickEdit(caller) {
 function onClickSave(caller) {
   switch (state) {
     case State.EDIT:
+      data = getModalData();
+      data.append('pk', currentId);
       $.ajax({
         url: `/components/${currentId}/`,
         type: 'PUT',
         headers: headers,
-        data: { pk: currentId, ...getModalData() },
+        processData: false,
+        contentType: false,
+        data: data,
         success: () => removeBanner(),
         error: (response) => addBanner(response.responseText)
       });
+      toViewMode();
+
       break;
 
     case State.VIEW:
@@ -70,16 +77,18 @@ function onClickSave(caller) {
         url: `/components/`,
         type: 'POST',
         headers: headers,
-        data: { ...getModalData() },
+        processData: false,
+        contentType: false,
+        data: getModalData(),
         success: (component) => {
           addBanner(`Component crated with pk ${component.id}. Congratulations!`, 'success');
           currentId = component.id;
+          toViewMode();
         },
         error: (response) => addBanner(response.responseText)
       });
       break;
   }
-  toViewMode();
 }
 
 function onClickCancel(caller) {
@@ -169,6 +178,7 @@ function toEditMode() {
 
   ['delBtn', 'editBtn'].forEach(id => modal.find(`#${id}`).hide());
   modal.find('#saveBtn').show()
+  modal.find('#picture-upload').show()
 }
 
 function toViewMode() {
@@ -191,7 +201,8 @@ function toViewMode() {
   modal.find("#getComponentsValue").show();
   modal.find('#saveBtn').html("Save changes").attr("class", "btn btn-info");
   modal.find('#cancelBtn').show();
-  modal.find('#saveBtn').hide()
+  modal.find('#saveBtn').hide();
+  modal.find('#picture-upload').hide();
 
   state = State.VIEW;
 }
@@ -247,7 +258,10 @@ function clearModal() {
 
 function dynPopulate(json_response) {
   Object.entries(json_response).forEach(
-    ([field, value]) => modal.find(`#${field}Value`).val(value)
+    ([field, value]) => {
+      console.log(field);
+      modal.find(`#${field}Value`).val(value);
+    }
   );
 
   Object.entries(json_response).filter(
@@ -274,13 +288,18 @@ function dynPopulate(json_response) {
 }
 
 function getModalData() {
-  return Object.fromEntries(
-    fields
-      .map(field => [field, $(`#${field}Value`).val()])
-      .filter(([, val]) => !!val && val != '-')
-      .concat(
-        booleanFields.map(field => [field, $(`#${field}Value`).is(":checked")])
-      )
-  );
+  const formdata = new FormData();
+
+  fields
+    .map(field => [field, $(`#${field}Value`).val()])
+    .filter(([, val]) => !!val && val != '-')
+    .concat(
+      booleanFields.map(field => [field, $(`#${field}Value`).is(":checked")])
+    )
+    .forEach(([key, val]) => formdata.append(key, val));
   
+  const image = $('#pictureInputValue').prop('files')[0]
+  if (image) formdata.append('picture', image);
+  
+  return formdata;
 }

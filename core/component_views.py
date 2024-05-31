@@ -4,9 +4,9 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.mixins import RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin, CreateModelMixin
 from rest_framework.viewsets import GenericViewSet
+from rest_framework import serializers
 from .models import *
 from .request_views import NotifyRequestsMixin 
-
 
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
