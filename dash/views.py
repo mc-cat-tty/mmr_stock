@@ -26,7 +26,7 @@ class DashView(ListView):
     return ctx | self.form_data | {'pagename': 'Dashboard'}
 
 class DashDetailView(TemplateView):
-  template_name="dashboard_detail.html"
+  template_name = "dashboard_detail.html"
 
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
