@@ -11,13 +11,11 @@ post_save.connect(create_profile, sender=User)
 
 class Component(models.Model):
   """
-  Entity that models an electronic component; not a single instance,
-  but a "model" of component.
+  Entity that models an electronic component; not a single entity,
+  but a "model/type" of component.
   The composed attribute (row, column, depth) identifies a unique location.
-  Enabled protection implies that a member must require access to a DL
+  Enabling protection implies that a member must require access to a DL
   before using a component.
-  Whenever quantity reaches zero the queuing the queuing mechanism is enabled,
-  and protection flag is therefore ignored, since a request is sent anyway.
   """
   name = models.CharField(max_length=300)
   code = models.CharField(max_length=50, blank=True)
@@ -41,7 +39,7 @@ class Component(models.Model):
 class Profile(models.Model):
   """
   Entity that models a profile.
-  These fields are added to the standard django user
+  These fields are added to the standard django user.
   A star is an entity that models a many to many preference (called
   'star', visually represented as a heart) relationship
   between a user and a component.
@@ -62,13 +60,12 @@ class Profile(models.Model):
 class Request(models.Model):
   """
   Relationship between user and component that models an enqueued request
-  for a protected or out-of-stock component.
-  If processed is false, the request is waiting to be processed; it can
+  for a protected component.
+  If approved is Null, the request is waiting to be processed; it can
   live as a Request.
-  When processed becomes true, there are two possible outcomes.
-  If processed true and the request is approved, the object is handed off to
-  the Use relationship. If processed true and the request is not approved,
-  it remains in Request relationship as log of failed request.
+  When approved is set, there are two possible outcomes.
+  If approved true, the object is handed off to the Use relationship.
+  If processed false, it remains in Request relationship as log of failed request.
   """
   class Meta:
     ordering = ["-date", "profile"]

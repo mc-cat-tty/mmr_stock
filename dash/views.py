@@ -56,6 +56,10 @@ class DashDetailView(PermissionRequiredMixin, TemplateView):
 
 class DashUpdatesAPI(AsyncWebsocketConsumer):
   async def connect(self):
+    user = self.scope.get("user")
+    if not user.is_staff:
+      await self.close()
+    
     self.user_id = self.scope["url_route"]["kwargs"]["user_id"]
     self.group_name = f"user_{self.user_id}"
    

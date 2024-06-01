@@ -4,6 +4,7 @@ from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from django.template.defaultfilters import date, time
@@ -12,6 +13,10 @@ from django.template.defaultfilters import date, time
 from .models import *
 
 class RequestSerializer(serializers.ModelSerializer):
+  """
+  Serialize all instrinsics and related fields of a request. Used
+  over websockets by real-time dashboard.
+  """
   component_name = serializers.CharField(source="component.name")
   component_code = serializers.CharField(source="component.code")
   component_pic = serializers.ImageField(source="component.picture")
@@ -19,11 +24,7 @@ class RequestSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Request
-    fields = (
-      'id', 'approved', 'quantity',
-      'date', 'profile_name', 'component_name',
-      'component_code', 'component_pic'
-    )
+    fields = ("__all__")
   
   def to_representation(self, instance):
     r = super().to_representation(instance)
@@ -69,6 +70,7 @@ class NotifyRequestsMixin:
 class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
   queryset = Request.objects.all()
   serializer_class = UpdateRequestSerializer
+  permission_classes = [IsAdminUser]
 
   def update(self, request: Request, *args, **kwargs) -> Response:
     pk = kwargs.get('pk')

@@ -57,9 +57,11 @@ class HomeView(ListView):
     if self.request.user.is_authenticated:
       favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
+    # Reccomended only for logged in users
+
     extra_context = {
       'pagename': 'Home',
-      'recommended': Component.objects.all()[:20],
+      'recommended': {},
       'favorite_components': favorite_components,
       'modal_textual_fields': list(COMPONENT_TEXT_FIELDS),
       'modal_numeric_fields': list(COMPONENT_NUMERIC_FIELDS),
