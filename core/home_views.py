@@ -1,7 +1,7 @@
-from curses.panel import update_panels
-from statistics import quantiles
 from django.db.models import CharField, TextField, IntegerField, BooleanField
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from .models import *
 
 
@@ -66,7 +66,7 @@ class HomeView(ListView):
 
     return context | extra_context | self.form_data
 
-class FavoritesView(HomeView):
+class FavoritesView(LoginRequiredMixin, HomeView):
   def get_queryset(self):
     queryset = super().get_queryset()
     p = Profile.objects.get(user = self.request.user)

@@ -25,4 +25,3 @@ urlpatterns = [
     path('analytics/', include('analytics.urls')),
     path('dash/', include('dash.urls'))
 ] + static(MEDIA_URL, document_root=MEDIA_ROOT)
-

@@ -10,6 +10,15 @@
     <div class="card-title">
       <h4 class="row d-flex justify-content-center pb-2">Welcome to MMR Stock Manager</h4>
     </div>
+
+    {% if "reason" in request.GET %}
+    <div class="alert alert-danger" role="alert">
+      {% if "anonymous" == request.GET.reason %}
+        Login to view your favorite items and your dashboard
+      {% endif %}
+    </div>
+    {% endif %}
+
     <div class="card-body overflow-auto">
       <form action="{% url 'core:login' %}" method="POST">
         {% csrf_token %}
