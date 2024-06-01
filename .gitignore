@@ -2,4 +2,4 @@ __pycache__
 dev_db.sqlite3
 .DS_Store
 media/components_pics
-media/user_pics
+media/users_pics

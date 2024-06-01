@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} MMR Stock | {{ user.username }} {% endblock %}
+
+{% block content %}
+
+<div class="row row-cols-md-2 m-3 d-flex justify-content-center align-items-center full-height">
+  <div class="card p-4 card-height" style="min-width: 200px; max-width: 700px">
+    <div class="card-title">
+      <h4 class="row d-flex justify-content-center pb-2">Welcome to MMR Stock Manager</h4>
+    </div>
+
+    <div class="card-body overflow-auto">
+      <form action="{% url 'core:profile' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {{ profileform|crispy }}
+        <div class="d-flex">
+          <input width="100%" class="btn btn-primary ms-auto" type="submit" value="Save">
+        </div>
+      </form>
+    </div>
+
+    <form class="row d-flex justify-content-center" action="{% url 'core:logout' %}" method="post">
+      {% csrf_token %}
+      <input style="max-width: 300px" class="btn btn-outline-warning" type="submit" value="Logout now">
+    </form>
+  </div>
+</div>
+
+
+<style>
+.full-height {
+  height: calc(100vh - 120px);
+}
+
+.card-height {
+  height: calc(75vh - 120px);
+}
+</style>
+
+{% endblock %}

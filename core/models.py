@@ -9,6 +9,10 @@ def create_profile(sender, instance, created, *args, **kwargs):
   if created:
     Profile.objects.create(user=instance)
 
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+  instance.profile.save()
+
 class Component(models.Model):
   """
   Entity that models an electronic component; not a single entity,
@@ -74,6 +78,9 @@ class Request(models.Model):
   date = models.DateTimeField()
   quantity = models.PositiveSmallIntegerField()
   approved = models.BooleanField(null=True, blank=True)
+
+  def is_processed(self) -> bool:
+    return self.approved != None
 
 class Use(models.Model):
   """

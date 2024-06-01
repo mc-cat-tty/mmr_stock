@@ -23,7 +23,9 @@
       <form action="{% url 'core:login' %}" method="POST">
         {% csrf_token %}
         {{ form|crispy }}
-        <input class="btn btn-primary " type="submit" value="Login"></form>
+        <div class="d-flex">
+          <input width="100%" class="btn btn-primary ms-auto" type="submit" value="Save">
+        </div>
       </form>
     </div>
   </div>
@@ -39,6 +41,5 @@
   height: calc(75vh - 120px);
 }
 </style>
-
 
 {% endblock %}

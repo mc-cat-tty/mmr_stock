@@ -14,7 +14,7 @@ from .request_views import NotifyRequestsMixin
 class ComponentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Component
-    fields = ('__all__')
+    fields = '__all__'
 
 class ComponentPermissions(BasePermission):
   def has_permission(self, request: Request, view: APIView):

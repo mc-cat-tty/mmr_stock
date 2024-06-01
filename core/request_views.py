@@ -25,7 +25,7 @@ class RequestSerializer(serializers.ModelSerializer):
   
   class Meta:
     model = Request
-    fields = ("__all__")
+    fields = "__all__"
   
   def to_representation(self, instance):
     r = super().to_representation(instance)
@@ -76,7 +76,8 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
   def update(self, request: Request, *args, **kwargs) -> Response:
     pk = kwargs.get('pk')
     request_obj = get_object_or_404(self.queryset, pk=pk)
-    if request_obj.approved != None: return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+    if request_obj.is_processed():
+      return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
     if request.data.get('approved') == 'true':
       Use.objects.create(

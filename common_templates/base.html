@@ -50,13 +50,25 @@
         <div class="vr"></div>
         
         <div class="navbar-nav">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="
             {% if user.is_authenticated %}
-            {{user}}
+              {% url 'core:profile' %}
             {% else %}
-            Login
+              {% url 'core:login' %}
             {% endif %}
-            <img width="48" class="rounded-circle img-thumbnail" src="{% static 'unknown_user.png' %}">
+          ">
+            {% if user.is_authenticated %}
+              {{user}}
+            {% else %}
+              Login
+            {% endif %}
+            <img style="width:48px;height:48px" class="object-fit-fill rounded-circle img-thumbnail" src="
+              {% if user.is_authenticated %}
+                {% static user.profile.propic %}
+              {% else %}
+                {% static 'unknown_user.png' %}
+              {% endif %}
+            ">
           </a>
         </div>
       </div>
