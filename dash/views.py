@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import get_object_or_404
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from json import dumps
@@ -41,7 +42,7 @@ class DashDetailView(PermissionRequiredMixin, TemplateView):
     
     if id > 0:
       all_users = False
-      profile = Profile.objects.get(user__pk=id)
+      profile = get_object_or_404(Profile, user__pk=id)
       username = profile.user.username
       uses = uses.filter(profile=profile)
       requests = requests.filter(profile=profile)

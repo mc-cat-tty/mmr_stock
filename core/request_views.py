@@ -1,4 +1,6 @@
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
+from django.template.defaultfilters import date, time
 from rest_framework import serializers, status
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -7,7 +9,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-from django.template.defaultfilters import date, time
 
 
 from .models import *
@@ -74,7 +75,7 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
 
   def update(self, request: Request, *args, **kwargs) -> Response:
     pk = kwargs.get('pk')
-    request_obj = self.queryset.get(pk=pk)
+    request_obj = get_object_or_404(self.queryset, pk=pk)
     if request_obj.approved != None: return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
     if request.data.get('approved') == 'true':
