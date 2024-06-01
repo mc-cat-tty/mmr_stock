@@ -8,7 +8,9 @@
   <span style="display:{{ component.protection|yesno:'inline,none' }}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
     <i class="bi bi-lock-fill"></i>
   </span>
+  {% if user.is_authenticated %}
   {% include 'star.html' with position='bottom' %}
+  {% endif %}
 
   <div class="card-image">
     <img

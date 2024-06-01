@@ -4,7 +4,9 @@
   class="shadow-sm card flex-row mb-3 text-bg-light align-middle component-card component-{{component.id}}"
   onclick="onClickComponentCard(this, {{component.id}})"
   >
+  {% if user.is_authenticated %}
   {% include 'star.html' with position='side' %}
+  {% endif %}
 
   <div class="card-image" >
     <img

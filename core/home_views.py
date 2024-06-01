@@ -53,7 +53,9 @@ class HomeView(ListView):
       Component._meta.fields
     )
     
-    favorite_components = Profile.objects.get(user=self.request.user).stars.all()
+    favorite_components = {}
+    if self.request.user.is_authenticated:
+      favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
     extra_context = {
       'pagename': 'Home',

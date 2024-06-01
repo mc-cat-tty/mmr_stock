@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from json import dumps
@@ -9,9 +9,10 @@ from json import dumps
 from core.models import *
 from core.request_views import RequestSerializer 
 
-class DashView(LoginRequiredMixin, ListView):
+class DashView(PermissionRequiredMixin, ListView):
   model = Profile
   template_name="dashboard.html"
+  permission_required = "is_staff"
   
   def get_queryset(self):
     queryset = super().get_queryset()
@@ -25,8 +26,9 @@ class DashView(LoginRequiredMixin, ListView):
     ctx = super().get_context_data(**kwargs)
     return ctx | self.form_data | {'pagename': 'Dashboard'}
 
-class DashDetailView(LoginRequiredMixin, TemplateView):
+class DashDetailView(PermissionRequiredMixin, TemplateView):
   template_name = "dashboard_detail.html"
+  permission_required = "is_staff"
 
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
