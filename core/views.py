@@ -2,34 +2,10 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 
-class LoginForm(forms.Form):
-  username = forms.CharField(required=True)
-  password = forms.CharField(widget=forms.PasswordInput, required=True)
-
-def login_view(request: HttpRequest) -> HttpResponse:
-  context = {"pagename": "Login"}
-
-  if request.method == "POST":
-    form = LoginForm(request.POST)
-    if not form.is_valid():
-      render(request, "login.html",
-        context
-        | {'form': form, "error": "Ore or more fields are invalid"}
-      )
-    
-    username = form.cleaned_data.get("username")
-    password = form.cleaned_data.get("password")
-    user = authenticate(request, username=username, password=password)
-    
-    if not user:
-      return render(request, "login.html",
-        context
-        | {'form': form, "error": "Wrong credentials"}
-      )
-    
-    login(request, user)
-    return redirect("core:home")
-
-  form = LoginForm()  
-  return render(request, "login.html", context | {'form': form})
+class LoginView(auth_views.LoginView):
+  template_name: str = "login.html"
+  redirect_authenticated_user: bool = True
+  next_page = reverse_lazy("core:home")
