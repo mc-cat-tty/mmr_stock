@@ -54,7 +54,7 @@
 
         </form>
 
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center {% if not user.is_authenticated %} disabled opacity-50 {% endif %}">
           <div class="col-md-4">
             <input type="number" class="form-control" id="getComponentsValue" placeholder="Get components">
           </div>

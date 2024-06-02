@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import date, time
+from django.utils.formats import time_format
 from rest_framework import serializers, status
 from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
@@ -9,7 +10,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
-
 
 from .models import *
 
@@ -29,7 +29,7 @@ class RequestSerializer(serializers.ModelSerializer):
   
   def to_representation(self, instance):
     r = super().to_representation(instance)
-    r['date'] = date(instance.date, "SHORT_DATE_FORMAT") + " " + time(instance.date, "G:i")
+    r['date'] = date(instance.date, "SHORT_DATE_FORMAT") + " " + time_format(instance.date, "G:i")
     return r
 
 class UpdateRequestSerializer(serializers.ModelSerializer):
