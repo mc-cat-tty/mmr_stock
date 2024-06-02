@@ -12,7 +12,7 @@ from core.request_views import RequestSerializer
 class DashView(PermissionRequiredMixin, ListView):
   model = Profile
   template_name="dashboard.html"
-  permission_required = "is_staff"
+  permission_required = ["is_superuser"]
   
   def get_queryset(self):
     queryset = super().get_queryset()
@@ -28,7 +28,7 @@ class DashView(PermissionRequiredMixin, ListView):
 
 class DashDetailView(PermissionRequiredMixin, TemplateView):
   template_name = "dashboard_detail.html"
-  permission_required = "is_staff"
+  permission_required = ["is_superuser"]
 
   def get_context_data(self, **kwargs):
     id = kwargs.get('id', 0)
@@ -57,7 +57,7 @@ class DashDetailView(PermissionRequiredMixin, TemplateView):
 class DashUpdatesAPI(AsyncWebsocketConsumer):
   async def connect(self):
     user = self.scope.get("user")
-    if not user.is_staff:
+    if not user.is_superuser:
       await self.close()
     
     self.user_id = self.scope["url_route"]["kwargs"]["user_id"]

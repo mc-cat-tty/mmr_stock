@@ -47,8 +47,8 @@ class ProfileDetailView(LoginRequiredMixin, UpdateView):
   success_url = "."
 
   def get_role(self):
-    if self.request.user.is_superuser: return "admin"
-    if self.request.user.is_staff: return "DL"
+    if self.request.user.is_staff: return "admin"
+    if self.request.user.is_superuser: return "DL"
     else: return "member" 
 
   def get_context_data(self, **kwargs):

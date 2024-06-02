@@ -7,7 +7,7 @@ from rest_framework.mixins import UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.request import Request
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import BasePermission
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
@@ -68,10 +68,15 @@ class NotifyRequestsMixin:
     return self.__notify(user_pk, request_pk, "request_reject")
 
 
+class IsSuperUser(BasePermission):
+  def has_permission(self, request, view):
+    return bool(request.user and request.user.is_superuser)
+
+
 class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
   queryset = Request.objects.all()
   serializer_class = UpdateRequestSerializer
-  permission_classes = [IsAdminUser]
+  permission_classes = [IsSuperUser]
 
   def update(self, request: Request, *args, **kwargs) -> Response:
     pk = kwargs.get('pk')

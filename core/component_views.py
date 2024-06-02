@@ -20,7 +20,7 @@ class ComponentPermissions(BasePermission):
   def has_permission(self, request: Request, view: APIView):
     if not isinstance(view, ComponentAPI): return False
 
-    if request.method in SAFE_METHODS or request.user.is_staff:
+    if request.method in SAFE_METHODS or request.user.is_superuser:
       return True
     
     if request.user.is_authenticated and request.method == "PATCH":

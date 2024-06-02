@@ -2,7 +2,7 @@ const headers = { 'X-CSRFToken': '{{ csrf_token }}' };
 const requst_card_classes = "shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle"
 const user_id = window.location.pathname.split("/").filter(x => !!x).pop()
 
-var updates_ws = new WebSocket(`ws://localhost:8080/dash/updates/${user_id}`);
+var updates_ws = new WebSocket(`ws://${window.location.host}/dash/updates/${user_id}`);
 updates_ws.onmessage = msg => onMessage(msg.data);
 
 function onClickRequest(caller, id, approved=false) {
