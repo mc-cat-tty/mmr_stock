@@ -54,7 +54,7 @@ class Command(BaseCommand):
         if pic:
           path = os.path.join(BASE_DIR, 'media', 'samples', self.match_pic(entry[0]))
           c.picture.save(
-            'media/components_pics',
+            'samples',
             File(open(path, 'rb'))
           )
 
