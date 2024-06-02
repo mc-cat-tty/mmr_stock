@@ -22,6 +22,14 @@ class Component(models.Model):
   Enabling protection implies that a member must require access to a DL
   before using a component.
   """
+  class Meta:
+    constraints = [
+      models.UniqueConstraint(
+        fields = ("row", "column", "depth"),
+        name = "unique_location"
+      )
+    ]
+  
   name = models.CharField(max_length=300)
   code = models.CharField(max_length=50, blank=True)
   picture = models.ImageField(

@@ -1,6 +1,6 @@
-from tkinter.tix import COLUMN
 from django.core.management.base import BaseCommand, CommandError, CommandParser
 from core.models import Component
+from itertools import count
 from pathlib import Path
 import csv, os
 
@@ -23,12 +23,13 @@ class Command(BaseCommand):
   def populate(self) -> None | CommandError:
     with open(FILEPATH) as mockfile:
       mockdata = csv.reader(mockfile, delimiter=',', quotechar='"')
-      for entry in mockdata:
+
+      for (entry, r, c, d) in zip(mockdata, count(), count(), count()):
         c = Component(
           name=entry[0],
           code=entry[1],
           quantity=int(entry[2] if entry[2] else 0),
-          row=1, column=1, depth=1
+          row=r, column=c, depth=d
         )
         c.save()
     
