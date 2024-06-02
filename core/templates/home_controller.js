@@ -42,7 +42,7 @@ function onClickAdd(caller) {
   modal.modal('show');
   clearModal();
   toEditMode();
-  modal.find('#picture-upload').show()
+  modal.find('#cancelBtn').hide()
   state = State.CREATE;
 }
 
@@ -271,16 +271,18 @@ function dynPopulate(json_response) {
     ([field, value]) => modal.find(`#${field}Value`).val(value)
   );
 
-  Object.entries(json_response).filter(
-    ([field,]) => booleanFields.includes(field)
-  ).forEach(
-    ([field, value]) => modal.find(`#${field}Value`).attr('checked', value)
-  )
-
   Object.entries(json_response)
     .filter(([, value]) => typeof (value) != 'number' && !value)
     .forEach(
       ([field]) => modal.find(`#${field}Value`).val('-')
+    );
+  
+  console.log(json_response);
+  Object.entries(json_response)
+    .filter(
+      ([field,]) => booleanFields.includes(field)
+    ).forEach(
+      ([field, value]) => modal.find(`#${field}Value`).prop('checked', $.parseJSON(value))
     )
 
   modal.find('#title').html(json_response.code);
@@ -304,7 +306,7 @@ function getModalData() {
       booleanFields.map(field => [field, $(`#${field}Value`).is(":checked")])
     )
     .forEach(([key, val]) => formdata.append(key, val));
-  
+
   const image = $('#pictureInputValue').prop('files')[0]
   if (image) formdata.append('picture', image);
   
