@@ -26,7 +26,7 @@
       {{ request.component.code }}
     </p>
   </div>
-  {% if request.approved == None %}
+  {% if request.approved == None and "Dashboard" in pagename %}
   <div class="ms-auto request-action-buttons">
     <button type="button" class="btn btn-danger btn-sm" onclick="onClickRequest(this, {{request.id}}, false)">Reject</button>
     <button type="button" class="btn btn-success btn-sm" onclick="onClickRequest(this, {{request.id}}, true)">Approve</button>

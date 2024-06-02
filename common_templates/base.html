@@ -41,6 +41,12 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'dash:mailbox' %}">
+              <img width="48" class="pr-5 rounded img-thumbnail" title="Mailbox" src="{% static 'mailbox.png' %}">
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link {% if not user.is_staff %} disabled opacity-50 {% endif %}" href="{% url 'dash:' %}">
               <img width="48" class="pr-5 rounded img-thumbnail" title="Dashboard" src="{% static 'dashboard.png' %}">
             </a>

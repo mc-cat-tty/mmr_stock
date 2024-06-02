@@ -78,6 +78,7 @@ class Request(models.Model):
   date = models.DateTimeField()
   quantity = models.PositiveSmallIntegerField()
   approved = models.BooleanField(null=True, blank=True)
+  viewed = models.BooleanField(default=False)
 
   def is_processed(self) -> bool:
     return self.approved != None
