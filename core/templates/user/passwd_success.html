@@ -1,0 +1,12 @@
+{% extends "base_card.html" %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+Password changed successfully
+{% endblock %}
+
+{% block body %}
+<div class="row d-flex justify-content-center">
+  <a href="{% url 'core:home' %}" style="max-width: 300px" class="btn btn-primary" type="button"> Home </a>
+</div>
+{% endblock %}

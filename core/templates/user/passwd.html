@@ -1,0 +1,17 @@
+{% extends "base_card.html" %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+Change your password
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'core:passwd' %}" method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <div class="d-flex">
+    <a href="{% url 'core:profile' %}" width="100%" class="btn btn-secondary ms-auto me-4" type="button"> Back </a>
+    <input width="100%" class="btn btn-primary" type="submit" value="Save">
+  </div>
+</form>
+{% endblock %}

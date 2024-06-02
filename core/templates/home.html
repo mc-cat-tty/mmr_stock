@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static core_extra %}
 
-{% block title %} MMR Stock | {{pagename}} {% endblock %}
-
 {% block content %}
 {% include 'component_modal.html' %}
 
@@ -63,7 +61,7 @@
     </div>
   </div>
 
-  {% if pagename == 'Home' %}
+  {% if pagename == 'Home' and user.is_authenticated %}
     <!-- Right column -->
     <div class="sidepanel">
       <div class="card full-height bg-info-subtle">
@@ -90,7 +88,7 @@
   width: 400px;
 }
 
-{% if pagename == 'Home' %}
+{% if pagename == 'Home' and user.is_authenticated %}
 .fill-width {
   width: calc(100vw - 450px);
 }

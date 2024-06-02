@@ -1,11 +1,9 @@
-from django.db import transaction
 from django.forms import ModelForm
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit  import UpdateView
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
-from django import forms
 
 from .models import Profile, User
 
@@ -13,21 +11,31 @@ class LoginView(LoginView):
   redirect_authenticated_user: bool = True
   next_page = reverse_lazy("core:home")
   template_name = "user/login.html"
+  extra_context = {'pagename': 'Login'}
 
-class LogoutView(LogoutView):
+class LogoutView(LoginRequiredMixin, LogoutView):
   template_name = "user/logout.html"
+  extra_context = {'pagename': 'Logout'}
+
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+  template_name = "user/passwd.html"
+  extra_context = {'pagename': 'Change Password'}
+  success_url = reverse_lazy("core:passwd_success")
+  
+class PasswordChnageDoneView(LoginRequiredMixin, PasswordChangeDoneView):
+  template_name = "user/passwd_success.html"
 
 class ProfileForm(ModelForm):
   class Meta:
     model = Profile
     fields = ("propic",)
-
+  
 class UserForm(ModelForm):
   class Meta:
     model = User
     fields = ("username", "first_name", "last_name", "email")
 
-ProfilePropicFormSet = forms.models.inlineformset_factory(
+ProfilePropicFormSet = inlineformset_factory(
     User, Profile, form=ProfileForm, can_delete=False,
     extra=0, min_num=1, validate_min=True,
 )
