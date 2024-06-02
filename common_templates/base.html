@@ -41,6 +41,9 @@
           </li>
 
           <li class="nav-item">
+            {% if user.profile.has_notification %}
+            <span class="p-2 bg-danger rounded-circle" style="position:relative;float:right; margin-bottom:-10px; clear:both;"></span>
+            {% endif %}
             <a class="nav-link" href="{% url 'dash:mailbox' %}">
               <img width="48" class="pr-5 rounded img-thumbnail" title="Mailbox" src="{% static 'mailbox.png' %}">
             </a>

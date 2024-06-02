@@ -13,8 +13,9 @@ class MailboxView(LoginRequiredMixin, ListView):
         .filter(profile__user = self.request.user)
         .exclude(approved = None)
     )
+    ret = frozenset(queryset)
     queryset.update(viewed = True)
-    return queryset
+    return ret
   
   def get_context_data(self, **kwargs):
     extra_content = {'pagename': 'Mailbox'}

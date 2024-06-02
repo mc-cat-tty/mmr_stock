@@ -1,3 +1,4 @@
+from urllib import request
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -60,6 +61,15 @@ class Profile(models.Model):
 
   def __str__(self):
     return f"{self.user.pk} {self.user.username}"
+   
+  def has_notification(self) -> bool:
+    # Trick to avoid self.request.[...].exclude(request_approved = None)
+    tot_num = self.requests.count()
+    not_app_num = self.requests.filter(request__approved = None).count()
+    app_num = tot_num - not_app_num
+    read_num = self.requests.filter(request__viewed=True).count()
+
+    return app_num != read_num
 
 class Request(models.Model):
   """

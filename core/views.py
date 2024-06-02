@@ -20,7 +20,7 @@ class LogoutView(LogoutView):
 class ProfileForm(ModelForm):
   class Meta:
     model = Profile
-    fields = ("propic","user")
+    fields = ("propic",)
 
 class UserForm(ModelForm):
   class Meta:
