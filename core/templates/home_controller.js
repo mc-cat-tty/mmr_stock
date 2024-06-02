@@ -238,12 +238,6 @@ function removeBanner() {
 }
 
 function clearModal() {
-  booleanFields.forEach(
-    field => modal
-    .find(`#${field}Value`)
-    .attr('checked', false)
-  );
-
   textualFields.forEach(
     field => modal
     .find(`#${field}Value`)
@@ -254,6 +248,12 @@ function clearModal() {
     field => modal
     .find(`#${field}Value`)
     .val('')
+  );
+
+  booleanFields.forEach(
+    field => modal
+    .find(`#${field}Value`)
+    .prop('checked', false)
   );
 
   modal.find('#title').html('Create New Component');
@@ -277,7 +277,6 @@ function dynPopulate(json_response) {
       ([field]) => modal.find(`#${field}Value`).val('-')
     );
   
-  console.log(json_response);
   Object.entries(json_response)
     .filter(
       ([field,]) => booleanFields.includes(field)
