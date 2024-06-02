@@ -11,10 +11,9 @@ class MailboxView(LoginRequiredMixin, ListView):
     queryset = (
       super().get_queryset()
         .filter(profile__user = self.request.user)
-        .exclude(approved = None)
     )
     ret = frozenset(queryset)
-    queryset.update(viewed = True)
+    queryset.exclude(approved = None).update(viewed = True)
     return ret
   
   def get_context_data(self, **kwargs):
