@@ -38,6 +38,11 @@ class ProfileDetailView(LoginRequiredMixin, UpdateView):
   template_name = "user/profile.html"
   success_url = "."
 
+  def get_role(self):
+    if self.request.user.is_superuser: return "admin"
+    if self.request.user.is_staff: return "DL"
+    else: return "member" 
+
   def get_context_data(self, **kwargs):
     context = super(ProfileDetailView, self).get_context_data(**kwargs)
     if self.request.POST:
@@ -48,7 +53,7 @@ class ProfileDetailView(LoginRequiredMixin, UpdateView):
       )
     else:
       context['profileform'] = ProfilePropicFormSet(instance=self.object)
-    return context | {'pagename': 'Profile'}
+    return context | {'pagename': 'Profile', 'role': self.get_role()}
   
   def form_valid(self, form):
     context = self.get_context_data()
