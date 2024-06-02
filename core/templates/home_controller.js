@@ -70,7 +70,7 @@ function onClickSave(caller) {
           addBanner(`Component updated. Congratulations!`, 'success');
           toViewMode();
         },
-        error: (response) => addBanner(response.responseText)
+        error: (response) => addBanner(response.responseText || "Failed update. Server not responding.")
       });
       break;
 
@@ -91,7 +91,7 @@ function onClickSave(caller) {
           // currentId = component.id;
           location.reload();
         },
-        error: (response) => addBanner(response.responseText)
+        error: (response) => addBanner(response.responseText || "Failed creation. Server not responding.")
       });
       break;
   }
