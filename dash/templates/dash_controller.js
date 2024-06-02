@@ -10,8 +10,7 @@ function onClickRequest(caller, id, approved=false) {
     url: `/requests/${id}/`,
     type: "PUT",
     headers: headers,
-    data: {'approved': approved},
-    success: response => setOutcome(id, response.approved)
+    data: {'approved': approved}
   });
 }
 
@@ -25,6 +24,11 @@ function onMessage(data) {
       container.prepend(createCard(data.content));
       break;
     case 'approve':
+      let logcontainer = $("#log-container");
+      let logcard = $(`#request-card-${data.id}`).clone();
+      logcard.attr('id', '');
+      logcard.find(".request-action-buttons").hide();
+      logcontainer.prepend(logcard);
       setOutcome(data.id, true);
       break;
     case 'reject':

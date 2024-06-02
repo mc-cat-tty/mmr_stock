@@ -12,7 +12,7 @@
       <div class="card-title">
         <h4 class="row d-flex justify-content-center pb-2">Usage Logging</h4>
       </div>
-      <div class="card-body overflow-auto">
+      <div class="card-body overflow-auto" id="log-container">
           {% for use in uses %}
             {% include "use_card.html" %}
           {% endfor %}
