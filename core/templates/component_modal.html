@@ -62,10 +62,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button id="delBtn" type="button" class="btn btn-outline-danger" onclick="onClickDel(this)">
+        <button id="delBtn" type="button" class="btn btn-outline-danger {% if not user.is_staff %} disabled opacity-50 {% endif %}" onclick="onClickDel(this)">
           <i class="bi bi-trash"></i>
         </button>
-        <button id="editBtn" type="button" class="btn btn-outline-secondary me-auto" onclick="onClickEdit(this)">
+        <button id="editBtn" type="button" class="btn btn-outline-secondary me-auto {% if not user.is_staff %} disabled opacity-50 {% endif %}" onclick="onClickEdit(this)">
           <i class="bi bi-pencil"></i>
         </button>
         <button id='cancelBtn' type="button" class="btn btn-secondary" onclick="onClickCancel(this)">Close</button>

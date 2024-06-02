@@ -12,7 +12,7 @@
     <div class="card p-4 full-height" style="max-width: 1500px;">
       <button
         type="button"
-        class="position-absolute top-0 start-50 translate-middle badge btn btn-primary"
+        class="position-absolute top-0 start-50 translate-middle badge btn btn-primary {% if not user.is_staff %} disabled opacity-50 {% endif %}"
         onclick="onClickAdd(this)"
       >
         <div class="h2 m-0 p-0">
