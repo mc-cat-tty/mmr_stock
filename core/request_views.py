@@ -93,6 +93,9 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
       )
       self.notify_approval(request_obj.profile.user.pk, request_obj.pk)
     else:
+      (Component.objects
+        .filter(pk=request_obj.component.pk)
+        .update(quantity = request_obj.quantity + request_obj.component.quantity))
       self.notify_rejection(request_obj.profile.user.pk, request_obj.pk)
     
     return super().update(request, *args, **kwargs)
