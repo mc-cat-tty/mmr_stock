@@ -88,7 +88,7 @@ class RequestAPI(GenericViewSet, UpdateModelMixin, NotifyRequestsMixin):
       Use.objects.create(
         profile = request_obj.profile,
         component = request_obj.component,
-        date = timezone.now(),
+        date = request_obj.date,
         quantity = request_obj.quantity
       )
       self.notify_approval(request_obj.profile.user.pk, request_obj.pk)

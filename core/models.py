@@ -29,7 +29,7 @@ class Component(models.Model):
         name = "unique_location"
       )
     ]
-  
+   
   name = models.CharField(max_length=300)
   code = models.CharField(max_length=50, blank=True)
   picture = models.ImageField(
