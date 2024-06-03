@@ -48,7 +48,7 @@ class ProfileDetailView(LoginRequiredMixin, UpdateView):
 
   def get_role(self):
     if self.request.user.is_staff: return "Admin"
-    if self.request.user.is_superuser: return "Divisin Leader"
+    if self.request.user.is_superuser: return "Division Leader"
     else: return "Member" 
 
   def get_context_data(self, **kwargs):

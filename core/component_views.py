@@ -46,6 +46,7 @@ class ComponentAPI(
     
     try:
       requested_quantity = int(request.data.get('quantity'))
+      if requested_quantity <= 0: raise Exception()
     except:
       return Response(status=status.HTTP_400_BAD_REQUEST)
     
