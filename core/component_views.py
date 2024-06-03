@@ -58,7 +58,7 @@ class ComponentAPI(
 
     if not component.protection:
       Use.objects.create(
-        profile=Profile.objects.get(user=self.request.user),
+        profile=self.request.user.profile,
         component=component,
         date=timezone.now(),
         quantity=requested_quantity
@@ -66,7 +66,7 @@ class ComponentAPI(
       action = 'get'
     else:
       r = Request.objects.create(
-        profile=Profile.objects.get(user=self.request.user),
+        profile=self.request.user.profile,
         component=component,
         date=timezone.now(),
         quantity=requested_quantity

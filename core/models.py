@@ -75,7 +75,7 @@ class Profile(models.Model):
     tot_num = self.requests.count()
     not_app_num = self.requests.filter(request__approved = None).count()
     app_num = tot_num - not_app_num
-    read_num = self.requests.filter(request__viewed=True).count()
+    read_num = self.requests.filter(request__viewed = True).count()
 
     return app_num != read_num
 

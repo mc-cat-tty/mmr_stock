@@ -11,14 +11,14 @@ class Command(BaseCommand):
     PATH = join(BASE_DIR, 'media', 'samples')
     admin = User.objects.create_superuser("admin", 'pass@pass.com', "123")
     admin.save()
-    Profile.objects.get(user=admin).propic.save(
+    admin.profile.propic.save(
       'admin',
       File(open(join(PATH, 'admin.png'), 'rb'))
     )
 
     user = User.objects.create_user("francesco", 'pass@pass.com', "123")
     user.save()
-    Profile.objects.get(user=user).propic.save(
+    user.profile.propic.save(
       'francesco',
       File(open(join(PATH, 'francesco.webp'), 'rb'))
     )

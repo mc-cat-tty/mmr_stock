@@ -65,7 +65,7 @@ class HomeView(ListView):
     
     favorite_components = {}
     if self.request.user.is_authenticated:
-      favorite_components = Profile.objects.get(user=self.request.user).stars.all()
+      favorite_components = self.request.user.profile.stars.all()
 
     # Reccomended only for logged in users
     recommended_components = {}
@@ -86,8 +86,7 @@ class HomeView(ListView):
 class FavoritesView(LoginRequiredMixin, HomeView):
   def get_queryset(self):
     queryset = super().get_queryset()
-    p = Profile.objects.get(user = self.request.user)
-    return queryset.filter(stars=p)
+    return queryset.filter(stars=self.request.user.profile)
   
   def get_context_data(self, **kwargs):
     return super().get_context_data(**kwargs) | {'pagename': 'Favorites'}
