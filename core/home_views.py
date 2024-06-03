@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import *
 
+from analytics.recommendation import get_suggested_items
 
 class HomeView(ListView):
   model = Component
@@ -58,10 +59,13 @@ class HomeView(ListView):
       favorite_components = Profile.objects.get(user=self.request.user).stars.all()
 
     # Reccomended only for logged in users
+    recommended_components = {}
+    if self.request.user.is_authenticated:
+      recommended_components = get_suggested_items(self.request.user.profile)
 
     extra_context = {
       'pagename': 'Home',
-      'recommended': {},
+      'recommended': recommended_components,
       'favorite_components': favorite_components,
       'modal_textual_fields': list(COMPONENT_TEXT_FIELDS),
       'modal_numeric_fields': list(COMPONENT_NUMERIC_FIELDS),

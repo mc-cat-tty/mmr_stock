@@ -5,14 +5,12 @@ from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 from core.models import Component, Profile
 
-from .recommendation import update_neigh
 
 class StarAPI(viewsets.ViewSet):
   permission_classes = [IsAuthenticated]
   COMPONENT_PK_KEY: str = 'component_pk'
 
   def toggle_star(self, request: Request) -> Response:
-    update_neigh(self.request.user.profile)
     try:
       component_pk = int(request.data[self.COMPONENT_PK_KEY])
     except:

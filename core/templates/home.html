@@ -72,6 +72,11 @@
           {% for r in recommended %}
             {% include "component_card_minimal.html" with preferred=r|is_in:favorite_components component=r %}
           {% endfor %}
+          {% if not recommended %}
+            <h5 class='row d-flex justify-content-center'>
+              Cold start
+            </h5>
+          {% endif %}
         </div>
       </div>
     </div>

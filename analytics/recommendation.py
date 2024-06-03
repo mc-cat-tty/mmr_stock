@@ -4,15 +4,18 @@ from collections import defaultdict
 
 from pandas import DataFrame
 from sklearn.neighbors import NearestNeighbors
+from core.models import Component
 
 K_NEIGH: int = 2
+MAX_SUGGESTED: int = 10
+SUGGESTED_THRESHOLD: float = 0.3
 
 def get_stars_vector(profile: Profile) -> dict[int, list[int]]:
   stars_pks = profile.stars.values_list('pk', flat=True)
   stars_dict = {pk: 1 for pk in stars_pks}
   return stars_dict
 
-def get_neighbor_users(profiles: QuerySet[Profile], sample_profile: Profile, k: int):
+def get_neighbor_users(profiles: QuerySet[Profile], sample_profile: Profile, k: int) -> list:
   sparse_users_stars = defaultdict(list)
 
   # Get a high dimensinal sparse vec, represented
@@ -39,8 +42,15 @@ def get_neighbor_users(profiles: QuerySet[Profile], sample_profile: Profile, k: 
   return get_r(neighbors[1][0])
 
 
-def update_neigh(profile: Profile):
+def get_suggested_items(profile: Profile):
   neigh = get_neighbor_users(Profile.objects.all(), profile, K_NEIGH)
   mean = neigh.mean()
   suggested = mean.sort_values(axis='index', ascending=False)
-  print(suggested[:4])
+  suggested_clamped = suggested[suggested>SUGGESTED_THRESHOLD]
+  suggested_idx = suggested_clamped.index
+  return (
+    Component.objects
+      .filter(pk__in = suggested_idx)
+      .exclude(stars__user = profile.user)
+      [:MAX_SUGGESTED]
+  )
