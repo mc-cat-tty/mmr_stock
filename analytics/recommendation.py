@@ -8,7 +8,7 @@ from core.models import Component
 
 K_NEIGH: int = 2
 MAX_SUGGESTED: int = 10
-SUGGESTED_THRESHOLD: float = 0.3
+SUGGESTED_THRESHOLD: float = 0.1
 
 def get_stars_vector(profile: Profile) -> dict[int, list[int]]:
   stars_pks = profile.stars.values_list('pk', flat=True)
@@ -43,7 +43,12 @@ def get_neighbor_users(profiles: QuerySet[Profile], sample_profile: Profile, k: 
 
 
 def get_suggested_items(profile: Profile):
-  neigh = get_neighbor_users(Profile.objects.all(), profile, K_NEIGH)
+  try:
+    neigh = get_neighbor_users(Profile.objects.all(), profile, K_NEIGH)
+  except:
+    return Component.objects.none()
+  
+  print(neigh)
   mean = neigh.mean()
   suggested = mean.sort_values(axis='index', ascending=False)
   suggested_clamped = suggested[suggested>SUGGESTED_THRESHOLD]

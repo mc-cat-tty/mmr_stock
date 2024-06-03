@@ -22,3 +22,7 @@ class Command(BaseCommand):
       'francesco',
       File(open(join(PATH, 'francesco.webp'), 'rb'))
     )
+
+    for username in ('foo', 'bar', 'baz', 'qux'):
+      user = User.objects.create_user(username, 'pass@pass.com', "123")
+      user.save()
