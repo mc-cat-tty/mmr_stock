@@ -28,7 +28,3 @@ class StarAPI(viewsets.ViewSet):
   
   def create(self, request: Request) -> Response:
     return self.toggle_star(request)
-
-  def destroy(self, request: Request) -> Response:
-    return self.toggle_star(request)
-
