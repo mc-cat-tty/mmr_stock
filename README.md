@@ -25,13 +25,13 @@ pipenv install
 pipenv shell
 ```
 
-If `pipenv` complains about the an already activate venv, solve manually or force it with `--anyway` option.
+If `pipenv` complains about an already activate venv, solve manually or force it with `--anyway` option.
 
 Make sure there is no SQLite DB in root folder (where this README is located).
 
 Create migrations (`python3 -m manage makemigrations`) if model has been changed.
 
-Run the following to setup a mock environment with some user and some components:
+Run the following to setup a mock environment with some users and some components:
 ```bash
 bash db_setup.sh
 ```
@@ -42,6 +42,21 @@ Now you are ready to start the development server:
 ```bash
 python3 -m manage runserver 8080
 ```
+
+## Recommendation System
+The recommendation is a user-based collaborative filtering.
+Each user is characterized by a (presumably sparse) vector of stars.
+
+For each user U, its k-neighbors (K parametrized in `analytics.recommendation` are extracted from the high dimensional space. This set of users will influence the prediction for U.
+
+The assumption under which this recommender works, is that if users similar to U liked an item i, also U will like it.
+
+Given this assumption, the prediction is easy: stars for each element are averaged. Items that survive a certain filter (thresholding + slicing N-top) will be proposted to the user in the _U may want to start from_ section.
+
+More subtle strategies can be used, like weighting each star with the correlation between U and the user that gave the star; but for small instances, the current method showed to perform well.
+
+## Testing
+Some illustrative test-cases have been written in `core` (logic-only tests) and `analytics` (api-oriented tests) applications.
 
 ## License
 This software is distributed under MIT License.
