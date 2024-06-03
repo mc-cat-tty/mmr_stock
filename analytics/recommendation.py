@@ -6,9 +6,9 @@ from pandas import DataFrame
 from sklearn.neighbors import NearestNeighbors
 from core.models import Component
 
-K_NEIGH: int = 2
+K_NEIGH: int = 3
 MAX_SUGGESTED: int = 10
-SUGGESTED_THRESHOLD: float = 0.1
+SUGGESTED_THRESHOLD: float = 0.5
 
 def get_stars_vector(profile: Profile) -> dict[int, list[int]]:
   stars_pks = profile.stars.values_list('pk', flat=True)
@@ -32,6 +32,9 @@ def get_neighbor_users(profiles: QuerySet[Profile], sample_profile: Profile, k: 
   # the nearest neighbor
   sample_vector = df[sample_profile]
   df = df.drop(sample_profile, axis=1)
+
+  # Filter out zero columns to avoid cold start issues
+  df = df.loc[:, (df != 0).any(axis=0)]
 
   # Compute k nearest neighbors with kd-tree
   neigh = NearestNeighbors(n_neighbors=k, algorithm='kd_tree')
