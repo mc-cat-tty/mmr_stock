@@ -43,6 +43,8 @@ Now you are ready to start the development server:
 python3 -m manage runserver 8080
 ```
 
+Login as _admin_ with password _123_ and start to explore.
+
 ## Recommendation System
 The recommendation is a user-based collaborative filtering.
 Each user is characterized by a (presumably sparse) vector of stars.
@@ -51,7 +53,7 @@ For each user U, its k-neighbors (K parametrized in `analytics.recommendation` a
 
 The assumption under which this recommender works, is that if users similar to U liked an item i, also U will like it.
 
-Given this assumption, the prediction is easy: stars for each element are averaged. Items that survive a certain filter (thresholding + slicing N-top) will be proposted to the user in the _U may want to start from_ section.
+Given this assumption, the prediction is easy: stars for each element are averaged. Items that survive a certain filter (thresholding + slicing N-top) will be proposted to the user in the _You may want to start from_ section.
 
 More subtle strategies can be used, like weighting each star with the correlation between U and the user that gave the star; but for small instances, the current method showed to perform well.
 
