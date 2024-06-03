@@ -1,3 +1,11 @@
 from django.test import TestCase
 
-# Create your tests here.
+class StarToggleTests(TestCase):
+  def test_rising_edge(self):
+    pass
+
+  def test_falling_edge(self):
+    pass
+
+  def test_edge_cases(self):
+    pass
