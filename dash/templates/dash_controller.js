@@ -28,6 +28,8 @@ function onMessage(data) {
       let logcard = $(`#request-card-${data.id}`).clone();
       logcard.attr('id', '');
       logcard.find(".request-action-buttons").hide();
+      logcard.find(".request-state").html('');
+      logcontainer.find("#log-container-separator").show()
       logcontainer.prepend(logcard);
       setOutcome(data.id, true);
       break;

@@ -11,10 +11,15 @@
         <h4 class="row d-flex justify-content-center pb-2">Usage Logging</h4>
       </div>
       <div class="card-body overflow-auto" id="log-container">
-          {% for use in uses %}
-            {% include "use_card.html" %}
-          {% endfor %}
+        <div id="log-container-separator" style="display:none" class="mb-4">
+          <i class="bi bi-arrow-up-short"></i> Just approved
+          <hr>
+          <i class="bi bi-arrow-down-short"></i> Old uses
         </div>
+        {% for use in uses %}
+          {% include "use_card.html" %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 
