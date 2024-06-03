@@ -1,7 +1,10 @@
 from django.db.models import CharField, TextField, IntegerField, BooleanField
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.db.models import Q
+from functools import reduce
+import operator
+
 from .models import *
 
 from analytics.recommendation import get_suggested_items
@@ -16,7 +19,13 @@ class HomeView(ListView):
     queryset = super().get_queryset()
 
     query = self.request.GET.get('query', '')
-    queryset = queryset.filter(code__icontains=query) | queryset.filter(name__icontains=query)
+    
+    # Trying to imitate full text search. Not supported by SQLite
+    splitted_query = query.split()
+    conditions_gen = (Q(name__icontains=word) for word in splitted_query)
+    ft_query = reduce(operator.and_, conditions_gen, Q())
+
+    queryset = queryset.filter(code__icontains=query) | queryset.filter(ft_query)
     min_quantity = self.request.GET.get('min', '')
     max_quantity = self.request.GET.get('max', '')
     

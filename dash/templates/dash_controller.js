@@ -46,17 +46,26 @@ function setOutcome(id, approved=false) {
   )
 
   $(`#request-card-${id}`).find(".request-action-buttons").hide()
+  $(`#request-card-${id}`).find(".request-state").html(approved ? "Approved" : "Rejected");
 }
 
 function createCard(request) {
   const card = document.createElement('div');
   card.className = requst_card_classes;
   card.id = `request-card-${request.id}`;
+  const request_state = ({
+    true: "Approved",
+    false: "Rejected"
+  })[request.approved] || "Pending";
 
   card.innerHTML = `
     <div class="row ms-1 text-muted font-monospace">
       ${request.profile_name}
       ${request.date}
+
+      <p class="card-text ms-auto col-sm-2 m-0 justify-content-center d-flex request-state">
+        ${request_state}
+      </p>
       
       <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
       ${request.quantity} PCS

@@ -29,7 +29,7 @@ class RequestSerializer(serializers.ModelSerializer):
   
   def to_representation(self, instance):
     r = super().to_representation(instance)
-    r['date'] = date(instance.date, "SHORT_DATE_FORMAT") + " " + time_format(instance.date, "G:i")
+    r['date'] = date(instance.date, "d/m/Y") + " " + time_format(instance.date, "G:i")
     return r
 
 class UpdateRequestSerializer(serializers.ModelSerializer):

@@ -3,8 +3,11 @@
 <div id ="request-card-{{request.id}}" class="shadow-sm card d-flex mb-3 p-1 ps-2 pe-2 text-bg-light align-middle {% if request.approved == True %} bg-success-subtle {% elif request.approved == False %} bg-danger-subtle {% endif %}">
   <div class="row ms-1 text-muted font-monospace">
     {% if all_users %} {{request.profile.user.username}} {% endif %}
-    {{ request.date|date:"SHORT_DATE_FORMAT" }}
+    {{ request.date|date:"d/m/Y" }}
     {{ request.date|time:"G:i" }}
+    <p class="card-text ms-auto col-sm-2 m-0 justify-content-center d-flex request-state">
+      {% if request.approved == None %} Pending {% elif request.approved %} Approved {% else %} Rejected {% endif %}
+    </p>
     <p class="card-text ms-auto fw-bold col-sm-2 m-0 justify-content-center d-flex">
       {{ request.quantity }} PCS
     </p>
