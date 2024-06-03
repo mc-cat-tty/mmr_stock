@@ -89,6 +89,11 @@ class StarToggleTest(StarTestMixin, TestCase):
       "If True and toggle succeded, it must be False"
     )
 
+class StarEdgeCasesTest(StarTestMixin, TestCase):
+  def setUp(self):
+    super().setUp()
+    self.authenticate()
+  
   def test_invalid_pk(self):
     response = self.client.post(
       ENDPOINT,
@@ -98,3 +103,17 @@ class StarToggleTest(StarTestMixin, TestCase):
     )
 
     self.assertEqual(response.status_code, 404)
+
+  def test_invalid_delete(self):
+    response = self.client.delete(ENDPOINT)
+    self.assertEqual(
+      response.status_code, 405,
+      "This method should not be supported"
+    )
+
+  def test_invalid_put(self):
+    response = self.client.delete(ENDPOINT)
+    self.assertEqual(
+      response.status_code, 405,
+      "This method should not be supported"
+    )
