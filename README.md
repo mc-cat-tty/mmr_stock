@@ -9,7 +9,7 @@ In particular, the focus of the project is on electronic components, but most of
 
 ## Features
 Noteworthy features are:
- - Protection mechanism: most valuable/scarse components can be protected. Users must require a DL approval before use.
+ - Protection mechanism: most valuable/scarce components can be protected. Users must require a DL approval before use.
  - Naive recommendation system: user-based collaborative filtering
  - Real-time dashboard for easy management
  - Front-end independent APIs
