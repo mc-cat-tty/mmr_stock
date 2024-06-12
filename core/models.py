@@ -23,6 +23,7 @@ class Component(models.Model):
   before using a component.
   """
   class Meta:
+    ordering = ["-pk"]
     constraints = [
       models.UniqueConstraint(
         fields = ("row", "column", "depth"),
