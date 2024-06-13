@@ -49,7 +49,7 @@ Login as _admin_ with password _123_ and start to explore.
 The recommendation is a user-based collaborative filtering.
 Each user is characterized by a (presumably sparse) vector of stars.
 
-For each user U, its k-neighbors (K parametrized in `analytics.recommendation` are extracted from the high dimensional space. This set of users will influence the prediction for U.
+For each user U, its k-neighbors (K parametrized in `analytics.recommendation`) are extracted from the high dimensional space. This is the set of users that has an influence on the prediction for U.
 
 The assumption under which this recommender works, is that if users similar to U liked an item i, also U will like it.
 
