@@ -25,7 +25,7 @@ pipenv install
 pipenv shell
 ```
 
-If `pipenv` complains about an already activate venv, solve manually or force it with `--anyway` option.
+If `pipenv` complains about an already active venv, solve manually or force it with `--anyway` option.
 
 Make sure there is no SQLite DB in root folder (where this README is located).
 
